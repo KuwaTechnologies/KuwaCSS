@@ -23,7 +23,7 @@ sidebar-right  same as sidebar, the sidebar is the last child
 cover          full viewport height; first child at top, last at bottom, middle centred; a single child is centred
 switcher       row that becomes a stack below --threshold (default 30rem)
 frame          fixed aspect ratio box (--ratio, default 16/9); img or video inside covers it
-reel           horizontal scroll strip with snap
+reel           horizontal scroll strip with snap; give it tabindex="0" and an aria-label so keyboards can scroll it
 Children:  grow  shrink-0  span-2  span-3  span-full  order-first  order-last  self-start  self-center
 self-end  self-stretch
 Alignment: align-start  align-center  align-end  align-stretch  align-baseline  justify-start  justify-center

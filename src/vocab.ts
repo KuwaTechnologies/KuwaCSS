@@ -65,7 +65,7 @@ export function entries(): Entry[] {
     p('cover', { 'min-block-size': 'var(--min-height, 100dvh)', display: 'flex', 'flex-direction': 'column' }, 'full viewport height; first child at top, last at bottom, middle centred; a single child is centred', { '--min-height': '100dvh' }),
     p('switcher', { display: 'flex', 'flex-wrap': 'wrap', gap: GAP }, 'row that becomes a stack below --threshold (default 30rem)', { '--threshold': '30rem', '--gap': 'var(--space-m)' }),
     p('frame', { 'aspect-ratio': 'var(--ratio, 16/9)', overflow: 'hidden' }, 'fixed aspect ratio box (--ratio, default 16/9); img or video inside covers it', { '--ratio': '16/9' }),
-    p('reel', { display: 'flex', 'overflow-x': 'auto', 'scroll-snap-type': 'x mandatory', 'overscroll-behavior-x': 'contain', gap: GAP }, 'horizontal scroll strip with snap', { '--gap': 'var(--space-m)' }),
+    p('reel', { display: 'flex', 'overflow-x': 'auto', 'scroll-snap-type': 'x mandatory', 'overscroll-behavior-x': 'contain', gap: GAP }, 'horizontal scroll strip with snap; give it tabindex="0" and an aria-label so keyboards can scroll it', { '--gap': 'var(--space-m)' }),
   );
 
   // Children

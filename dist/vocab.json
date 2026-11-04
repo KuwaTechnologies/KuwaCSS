@@ -274,7 +274,7 @@
         "--gap": "var(--space-m)"
       },
       "responsive": false,
-      "description": "horizontal scroll strip with snap"
+      "description": "horizontal scroll strip with snap; give it tabindex=\"0\" and an aria-label so keyboards can scroll it"
     },
     {
       "name": "grow",
