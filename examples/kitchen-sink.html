@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KuwaCSS kitchen sink</title>
+  <link rel="stylesheet" href="../dist/kuwa.css">
+</head>
+<body>
+  <header class="container row justify-between padding-y-m">
+    <a href="#" class="bold text-l">KuwaCSS</a>
+    <nav>
+      <a href="#elements">Elements</a>
+      <a href="#layout">Layout</a>
+      <a href="#components">Components</a>
+      <a href="#" class="button primary">Sign up</a>
+    </nav>
+  </header>
+
+  <main class="container stack gap-2xl padding-y-xl">
+
+    <section id="elements" class="stack gap-l">
+      <h1>Classless elements</h1>
+      <p id="flow-p">A paragraph of running text with a <a href="#">link</a>, <strong>strong text</strong>, <em>emphasis</em>, <code>inline code</code>, <kbd>Ctrl</kbd> + <kbd>K</kbd>, <mark>highlighted</mark> words and an <abbr title="abbreviation">abbr</abbr>.</p>
+      <h2>Heading two</h2>
+      <h3>Heading three</h3>
+      <h4>Heading four</h4>
+      <h5>Heading five</h5>
+      <h6>Heading six</h6>
+      <blockquote>A quotation set off from the running text.</blockquote>
+      <ul><li>Unordered one</li><li>Unordered two</li></ul>
+      <ol><li>Ordered one</li><li>Ordered two</li></ol>
+      <pre><code>const x = 1;
+console.log(x);</code></pre>
+      <hr>
+      <table>
+        <caption>Monthly totals</caption>
+        <thead><tr><th>Month</th><th>Users</th><th>Revenue</th></tr></thead>
+        <tbody><tr><td>January</td><td class="tabular">1,204</td><td class="tabular">$8,310</td></tr><tr><td>February</td><td class="tabular">1,560</td><td class="tabular">$9,902</td></tr></tbody>
+      </table>
+      <figure>
+        <div class="frame" id="frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%23789'/%3E%3C/svg%3E" alt="Grey placeholder"></div>
+        <figcaption>A 16:9 frame.</figcaption>
+      </figure>
+      <form class="stack gap-m" onsubmit="return false">
+        <label>Email <input type="email" placeholder="you@example.com"></label>
+        <label>Password <input type="password"></label>
+        <label>Plan <select><option>Free</option><option>Team</option></select></label>
+        <label>Notes <textarea></textarea></label>
+        <label><input type="checkbox" checked> Remember me</label>
+        <label><input type="radio" name="r" checked> Option A</label>
+        <label><input type="checkbox" class="switch" id="switch"> Notifications</label>
+        <label>Volume <input type="range"></label>
+        <label>Colour <input type="color" value="#4455ff"></label>
+        <label>Attachment <input type="file"></label>
+        <fieldset><legend>Group</legend><label><input type="checkbox"> One</label><label><input type="checkbox"> Two</label></fieldset>
+        <progress value="40" max="100">40%</progress>
+        <div class="row"><button type="submit">Submit</button><button type="button" disabled>Disabled</button><input type="reset" value="Reset"></div>
+      </form>
+      <details><summary>Disclosure summary</summary><p>Hidden content revealed by the native details element.</p></details>
+      <button type="button" onclick="document.getElementById('dlg').showModal()">Open dialog</button>
+      <dialog id="dlg"><h3>Dialog</h3><p>Native dialog, styled.</p><form method="dialog"><button class="primary">Close</button></form></dialog>
+    </section>
+
+    <section id="layout" class="stack gap-l">
+      <h2>Layout primitives</h2>
+      <div class="stack gap-s" id="stack"><p>stack one</p><p>stack two</p><p>stack three</p></div>
+      <div class="row gap-s" id="row"><span class="badge">row one</span><span class="badge">row two</span><span class="badge">row three</span></div>
+      <div class="grid gap-m" id="grid" style="--min: 16rem">
+        <div class="card">grid 1</div><div class="card">grid 2</div><div class="card">grid 3</div><div class="card">grid 4</div>
+      </div>
+      <div class="cols-3 gap-m" id="cols"><div class="card">cols 1</div><div class="card">cols 2</div><div class="card">cols 3</div></div>
+      <div class="sidebar gap-m" id="sidebar"><nav class="stack gap-xs bg-subtle padding-m rounded"><a href="#">One</a><a href="#">Two</a></nav><div class="card">Main content fills the remaining space and wraps below the sidebar when there is no room.</div></div>
+      <div class="switcher gap-m" id="switcher"><div class="card">switch 1</div><div class="card">switch 2</div><div class="card">switch 3</div></div>
+      <div class="cover bg-subtle rounded" id="cover" style="--min-height: 100dvh"><p class="text-center text-xl" id="cover-child">Centred in a cover</p></div>
+      <div class="center bg-subtle rounded" id="center" style="height: 8rem"><span class="badge primary">centred</span></div>
+      <div class="reel gap-m" id="reel"><div class="card" style="inline-size: 16rem">reel 1</div><div class="card" style="inline-size: 16rem">reel 2</div><div class="card" style="inline-size: 16rem">reel 3</div><div class="card" style="inline-size: 16rem">reel 4</div><div class="card" style="inline-size: 16rem">reel 5</div><div class="card" style="inline-size: 16rem">reel 6</div></div>
+      <div class="hidden m:stack gap-s" id="hm"><p>Visible from tablet width</p><p>as a stack</p></div>
+      <div class="row gap-s" id="shrink-wrap"><span class="badge shrink-0">label</span><p class="min-width-0 truncate" id="shrink">averyveryverylongunbrokenstringthatwouldotherwiseoverflowtheviewportandbreakthelayoutentirelyifnothingstoppedit_averyveryverylongunbrokenstringthatwouldotherwiseoverflowtheviewportandbreakthelayoutentirelyifnothingstoppedit</p></div>
+    </section>
+
+    <section id="components" class="stack gap-l">
+      <h2>Components</h2>
+      <div class="row gap-s">
+        <button type="button" id="btn-default">Default</button>
+        <button type="button" class="primary" id="btn-primary">Primary</button>
+        <button type="button" class="ghost" id="btn-ghost">Ghost</button>
+        <button type="button" class="danger" id="btn-danger">Danger</button>
+        <button type="button" class="small" id="btn-small">Small</button>
+        <button type="button" class="large" id="btn-large">Large</button>
+        <a href="#" class="button" id="btn-link">Link button</a>
+      </div>
+      <div class="row gap-s">
+        <span class="badge" id="badge-default">Default</span>
+        <span class="badge primary" id="badge-primary">Primary</span>
+        <span class="badge success" id="badge-success">Success</span>
+        <span class="badge warning" id="badge-warning">Warning</span>
+        <span class="badge danger" id="badge-danger">Danger</span>
+        <span class="badge info" id="badge-info">Info</span>
+      </div>
+      <div class="stack gap-s">
+        <div class="alert" id="alert-default" role="status">A neutral message.</div>
+        <div class="alert primary" id="alert-primary" role="status">A primary message.</div>
+        <div class="alert success" id="alert-success" role="status">Saved successfully.</div>
+        <div class="alert warning" id="alert-warning" role="status">Check your input.</div>
+        <div class="alert danger" id="alert-danger" role="alert">Something went wrong.</div>
+        <div class="alert info" id="alert-info" role="status">For your information.</div>
+      </div>
+      <div class="grid gap-m" style="--min: 12rem">
+        <div class="bg-primary padding rounded" id="bg-primary">bg-primary</div>
+        <div class="bg-success padding rounded" id="bg-success">bg-success</div>
+        <div class="bg-warning padding rounded" id="bg-warning">bg-warning</div>
+        <div class="bg-danger padding rounded" id="bg-danger">bg-danger</div>
+        <div class="bg-info padding rounded" id="bg-info">bg-info</div>
+        <div class="bg-primary-soft padding rounded" id="bg-primary-soft">bg-primary-soft</div>
+        <div class="bg-success-soft padding rounded" id="bg-success-soft">bg-success-soft</div>
+        <div class="bg-warning-soft padding rounded" id="bg-warning-soft">bg-warning-soft</div>
+        <div class="bg-danger-soft padding rounded" id="bg-danger-soft">bg-danger-soft</div>
+        <div class="bg-info-soft padding rounded" id="bg-info-soft">bg-info-soft</div>
+        <div class="bg-surface border padding rounded" id="surface">bg-surface</div>
+        <div class="bg-subtle padding rounded" id="subtle">bg-subtle</div>
+      </div>
+      <p class="color-muted" id="muted">Muted text on the page background.</p>
+      <p><a href="#" id="link">A link on the page background.</a></p>
+      <article class="card stack gap-s" id="card"><h3>Card title</h3><p class="color-muted">Card body text.</p><a href="#" class="button primary width-fit">Action</a></article>
+      <article class="prose" id="prose"><h2>Prose</h2><p>Long-form text gets a comfortable measure, rhythm and list bullets.</p><ul><li>One</li><li>Two</li></ul></article>
+      <p><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> Icon inline with text.</p>
+      <section data-theme="dark" class="stack gap-s padding-l rounded" id="dark-section">
+        <h3>Forced dark subtree</h3>
+        <p class="color-muted">This section is dark regardless of the system setting.</p>
+        <button type="button" class="primary">Primary in dark</button>
+      </section>
+    </section>
+  </main>
+
+  <footer class="container padding-y-l text-s color-muted border-top">
+    <div class="row justify-between"><span>© 2026 Kuwa Technologies</span><nav><a href="#">Privacy</a><a href="#">Terms</a></nav></div>
+  </footer>
+</body>
+</html>

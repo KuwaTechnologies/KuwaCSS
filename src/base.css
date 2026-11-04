@@ -1,0 +1,124 @@
+/* Classless base: semantic HTML looks finished with no classes. Zero specificity throughout. */
+:where(html) {
+  font-family: var(--font);
+  line-height: var(--leading);
+  color: var(--text);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+:where(body) { font-size: var(--text-m); }
+:where([data-theme]) { background: var(--bg-page); color: var(--text); }
+::selection { background: color-mix(in oklch, var(--primary) 30%, transparent); }
+
+/* Flow rhythm: elements keep a bottom margin; layout primitives zero it for their children */
+:where(p, ul, ol, dl, blockquote, pre, table, figure, fieldset, details, address, hr, h1, h2, h3, h4, h5, h6) { margin-block: 0 var(--space-m); }
+:where(h1, h2, h3, h4):where(:not(:first-child)) { margin-block-start: var(--space-l); }
+
+/* Headings */
+:where(h1, h2, h3, h4, h5, h6) { font-weight: 600; line-height: 1.2; text-wrap: balance; letter-spacing: -0.01em; }
+:where(h1) { font-size: var(--text-3xl); }
+:where(h2) { font-size: var(--text-2xl); }
+:where(h3) { font-size: var(--text-xl); }
+:where(h4) { font-size: var(--text-l); }
+:where(h5) { font-size: var(--text-m); }
+:where(h6) { font-size: var(--text-s); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+
+/* Inline text */
+:where(a) { color: var(--primary); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+:where(a:hover) { text-decoration-thickness: 2px; }
+:where(strong, b) { font-weight: 600; }
+:where(small) { font-size: var(--text-s); }
+:where(abbr[title]) { text-decoration: underline dotted; cursor: help; }
+:where(mark) { background: var(--warning-soft); color: var(--warning-text); padding: 0 0.2em; border-radius: 2px; }
+:where(code, kbd, samp) { font-family: var(--font-mono); font-size: 0.9em; background: var(--bg-subtle); padding: 0.1em 0.35em; border-radius: calc(var(--radius) / 2); }
+:where(kbd) { border: 1px solid var(--border); border-block-end-width: 2px; }
+:where(pre) { font-family: var(--font-mono); font-size: var(--text-s); line-height: 1.6; background: var(--bg-subtle); padding: var(--space-m); border-radius: var(--radius); overflow-x: auto; }
+:where(pre code) { background: none; padding: 0; font-size: inherit; }
+
+/* Blocks */
+:where(blockquote) { padding-inline-start: var(--space-m); border-inline-start: 3px solid var(--border); color: var(--muted); }
+:where(ul, ol) { padding-inline-start: 1.25em; }
+:where(li + li) { margin-block-start: var(--space-xs); }
+:where(hr) { block-size: 1px; background: var(--border); margin-block: var(--space-l); }
+:where(figcaption) { font-size: var(--text-s); color: var(--muted); margin-block-start: var(--space-xs); }
+
+/* Navigation: a nav is a wrapping row; its lists lose bullets */
+:where(nav) { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-m); }
+:where(nav ul, nav ol) { display: contents; list-style: none; }
+:where(nav li) { margin: 0; }
+:where(nav a) { text-decoration: none; }
+:where(nav a:hover) { text-decoration: underline; }
+
+/* Tables */
+:where(table) { inline-size: 100%; text-align: start; }
+:where(th, td) { padding: var(--space-s) var(--space-m); border-block-end: 1px solid var(--border); text-align: start; vertical-align: top; }
+:where(th) { font-weight: 600; }
+:where(thead th) { border-block-end-width: 2px; }
+:where(caption) { text-align: start; color: var(--muted); font-size: var(--text-s); padding-block-end: var(--space-s); }
+
+/* Buttons: a <button> needs no class; <a class="button"> gets the same look */
+:where(button, .button) {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  min-block-size: 2.5rem; padding: 0.5rem 1rem;
+  font-size: var(--text-m); font-weight: 500; line-height: 1.2; white-space: nowrap;
+  color: var(--text); background: var(--bg-surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  cursor: pointer; text-decoration: none; user-select: none;
+  transition: color var(--transition), background-color var(--transition), border-color var(--transition), box-shadow var(--transition), translate var(--transition);
+}
+:where(button, .button):where(:hover) { background: var(--bg-subtle); }
+:where(button, .button):where(:active) { translate: 0 1px; }
+:where(button, .button):where(:disabled, [aria-disabled="true"]) { opacity: 0.5; cursor: not-allowed; translate: none; }
+
+/* Form controls */
+:where(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="submit"], [type="button"], [type="reset"]), select, textarea) {
+  display: block; inline-size: 100%; min-block-size: 2.5rem; padding: 0.5rem 0.75rem;
+  font-size: var(--text-m); font-weight: 400; line-height: 1.4;
+  color: var(--text); background: var(--bg-surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+}
+:where(input[type="submit"], input[type="button"], input[type="reset"]) {
+  display: inline-flex; min-block-size: 2.5rem; padding: 0.5rem 1rem; font-weight: 500;
+  color: var(--text); background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer;
+}
+:where(input, textarea)::placeholder { color: var(--muted); opacity: 1; }
+:where(textarea) { min-block-size: 6rem; }
+:where(select:not([multiple], [size])) {
+  appearance: none; padding-inline-end: 2.25rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23777' stroke-width='1.5' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 1rem;
+}
+:where(input[type="checkbox"], input[type="radio"]) { accent-color: var(--primary); inline-size: 1.1em; block-size: 1.1em; margin: 0; flex-shrink: 0; }
+:where(input[type="range"]) { accent-color: var(--primary); inline-size: 100%; }
+:where(input[type="color"]) { block-size: 2.5rem; inline-size: 4rem; padding: 0.2rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-surface); }
+:where(input[type="file"]) { padding: 0.5rem 0; }
+:where(progress, meter) { display: block; inline-size: 100%; block-size: 0.5rem; accent-color: var(--primary); }
+
+/* Labels: text sits above the control; a wrapped checkbox or radio becomes an inline row */
+:where(label) { display: grid; gap: var(--space-xs); font-size: var(--text-s); font-weight: 500; }
+:where(label):where(:has(> input[type="checkbox"], > input[type="radio"], > .switch)) {
+  grid-auto-flow: column; justify-content: start; align-items: center; gap: var(--space-s);
+  font-size: var(--text-m); font-weight: 400; cursor: pointer;
+}
+:where(fieldset) { display: grid; gap: var(--space-m); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-m); }
+:where(legend) { font-weight: 600; padding-inline: var(--space-xs); }
+
+/* Disclosure and dialog */
+:where(details) { border: 1px solid var(--border); border-radius: var(--radius); padding-inline: var(--space-m); }
+:where(summary) { cursor: pointer; font-weight: 600; padding-block: var(--space-s); margin-inline: calc(-1 * var(--space-m)); padding-inline: var(--space-m); }
+:where(details[open] > summary) { border-block-end: 1px solid var(--border); margin-block-end: var(--space-s); }
+:where(dialog) {
+  inline-size: 100%; max-inline-size: min(90vw, 36rem);
+  padding: var(--space-l); border: 0; border-radius: calc(var(--radius) * 1.5);
+  color: var(--text); background: var(--bg-surface); box-shadow: var(--shadow-xl);
+}
+:where(dialog)::backdrop { background: rgb(0 0 0 / 0.5); }
+:where([popover]) { padding: var(--space-m); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); background: var(--bg-surface); box-shadow: var(--shadow-l); }
+
+/* Focus: visible everywhere, never removed */
+:where(:focus-visible) { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+@media (prefers-contrast: more) {
+  :where(button, .button, input, select, textarea, details, fieldset) { border-width: 2px; }
+  :where(:focus-visible) { outline-width: 3px; }
+}

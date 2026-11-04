@@ -1,0 +1,3475 @@
+{
+  "$schema": "https://kuwacss.dev/vocab.schema.json",
+  "version": "0.1.0",
+  "scales": {
+    "space": [
+      "0",
+      "xs",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "2xl",
+      "3xl"
+    ],
+    "text": [
+      "xs",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "2xl",
+      "3xl",
+      "4xl"
+    ]
+  },
+  "prefixes": {
+    "m": "48rem",
+    "l": "64rem",
+    "xl": "80rem"
+  },
+  "responsive": [
+    "hidden",
+    "block",
+    "stack",
+    "row",
+    "cols-1",
+    "cols-2",
+    "cols-3",
+    "cols-4",
+    "text-left",
+    "text-center",
+    "text-right",
+    "order-first",
+    "order-last",
+    "grow"
+  ],
+  "classes": [
+    {
+      "name": "stack",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "flex",
+        "flex-direction": "column",
+        "flex-wrap": "nowrap",
+        "align-items": "stretch",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--gap": "var(--space-m)"
+      },
+      "responsive": true,
+      "description": "vertical flex column, children separated by gap (--gap, default m)"
+    },
+    {
+      "name": "row",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "flex",
+        "flex-direction": "row",
+        "flex-wrap": "wrap",
+        "align-items": "center",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--gap": "var(--space-m)"
+      },
+      "responsive": true,
+      "description": "horizontal flex row, wraps, children vertically centred (--gap)"
+    },
+    {
+      "name": "grid",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "grid",
+        "grid-template-columns": "repeat(auto-fit, minmax(min(var(--min, 16rem), 100%), 1fr))",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--min": "16rem",
+        "--gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "responsive columns, as many as fit; --min sets minimum column width (default 16rem)"
+    },
+    {
+      "name": "cols-1",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "grid",
+        "grid-template-columns": "repeat(1, minmax(0, 1fr))",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--gap": "var(--space-m)"
+      },
+      "responsive": true,
+      "description": "fixed 1-column grid; combine with m:/l:/xl:"
+    },
+    {
+      "name": "cols-2",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "grid",
+        "grid-template-columns": "repeat(2, minmax(0, 1fr))",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--gap": "var(--space-m)"
+      },
+      "responsive": true,
+      "description": "fixed 2-column grid; combine with m:/l:/xl:"
+    },
+    {
+      "name": "cols-3",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "grid",
+        "grid-template-columns": "repeat(3, minmax(0, 1fr))",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--gap": "var(--space-m)"
+      },
+      "responsive": true,
+      "description": "fixed 3-column grid; combine with m:/l:/xl:"
+    },
+    {
+      "name": "cols-4",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "grid",
+        "grid-template-columns": "repeat(4, minmax(0, 1fr))",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--gap": "var(--space-m)"
+      },
+      "responsive": true,
+      "description": "fixed 4-column grid; combine with m:/l:/xl:"
+    },
+    {
+      "name": "container",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "inline-size": "100%",
+        "max-inline-size": "var(--container, 72rem)",
+        "margin-inline": "auto",
+        "padding-inline": "var(--space-m)"
+      },
+      "knobs": {
+        "--container": "72rem"
+      },
+      "responsive": false,
+      "description": "centred content column, max 72rem, side padding"
+    },
+    {
+      "name": "center",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "grid",
+        "place-items": "center"
+      },
+      "responsive": false,
+      "description": "centres children horizontally and vertically"
+    },
+    {
+      "name": "sidebar",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "flex",
+        "flex-wrap": "wrap",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--side": "16rem",
+        "--gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "first child is a fixed sidebar (--side, default 16rem), second child fills; stacks when narrow"
+    },
+    {
+      "name": "sidebar-right",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "flex",
+        "flex-wrap": "wrap",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--side": "16rem",
+        "--gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "same as sidebar, the sidebar is the last child"
+    },
+    {
+      "name": "cover",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "min-block-size": "var(--min-height, 100dvh)",
+        "display": "flex",
+        "flex-direction": "column"
+      },
+      "knobs": {
+        "--min-height": "100dvh"
+      },
+      "responsive": false,
+      "description": "full viewport height; first child at top, last at bottom, middle centred; a single child is centred"
+    },
+    {
+      "name": "switcher",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "flex",
+        "flex-wrap": "wrap",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--threshold": "30rem",
+        "--gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "row that becomes a stack below --threshold (default 30rem)"
+    },
+    {
+      "name": "frame",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "aspect-ratio": "var(--ratio, 16/9)",
+        "overflow": "hidden"
+      },
+      "knobs": {
+        "--ratio": "16/9"
+      },
+      "responsive": false,
+      "description": "fixed aspect ratio box (--ratio, default 16/9); img or video inside covers it"
+    },
+    {
+      "name": "reel",
+      "group": "layout",
+      "kind": "primitive",
+      "css": {
+        "display": "flex",
+        "overflow-x": "auto",
+        "scroll-snap-type": "x mandatory",
+        "overscroll-behavior-x": "contain",
+        "gap": "var(--gap, var(--space-m))"
+      },
+      "knobs": {
+        "--gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "horizontal scroll strip with snap"
+    },
+    {
+      "name": "grow",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "flex-grow": "1"
+      },
+      "responsive": true,
+      "description": "child grows to fill remaining space"
+    },
+    {
+      "name": "shrink-0",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "flex-shrink": "0"
+      },
+      "responsive": false,
+      "description": "child never shrinks"
+    },
+    {
+      "name": "span-2",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "grid-column": "span 2"
+      },
+      "responsive": false,
+      "description": "grid child spans 2 columns"
+    },
+    {
+      "name": "span-3",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "grid-column": "span 3"
+      },
+      "responsive": false,
+      "description": "grid child spans 3 columns"
+    },
+    {
+      "name": "span-full",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "grid-column": "1 / -1"
+      },
+      "responsive": false,
+      "description": "grid child spans all columns"
+    },
+    {
+      "name": "order-first",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "order": "-1"
+      },
+      "responsive": true,
+      "description": "child moves first"
+    },
+    {
+      "name": "order-last",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "order": "99"
+      },
+      "responsive": true,
+      "description": "child moves last"
+    },
+    {
+      "name": "self-start",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "align-self": "start"
+      },
+      "responsive": false,
+      "description": "child aligns itself to start"
+    },
+    {
+      "name": "self-center",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "align-self": "center"
+      },
+      "responsive": false,
+      "description": "child aligns itself to center"
+    },
+    {
+      "name": "self-end",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "align-self": "end"
+      },
+      "responsive": false,
+      "description": "child aligns itself to end"
+    },
+    {
+      "name": "self-stretch",
+      "group": "children",
+      "kind": "utility",
+      "css": {
+        "align-self": "stretch"
+      },
+      "responsive": false,
+      "description": "child aligns itself to stretch"
+    },
+    {
+      "name": "align-start",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "align-items": "start"
+      },
+      "responsive": false,
+      "description": "cross-axis alignment: start"
+    },
+    {
+      "name": "align-center",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "align-items": "center"
+      },
+      "responsive": false,
+      "description": "cross-axis alignment: center"
+    },
+    {
+      "name": "align-end",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "align-items": "end"
+      },
+      "responsive": false,
+      "description": "cross-axis alignment: end"
+    },
+    {
+      "name": "align-stretch",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "align-items": "stretch"
+      },
+      "responsive": false,
+      "description": "cross-axis alignment: stretch"
+    },
+    {
+      "name": "align-baseline",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "align-items": "baseline"
+      },
+      "responsive": false,
+      "description": "cross-axis alignment: baseline"
+    },
+    {
+      "name": "justify-start",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "justify-content": "flex-start"
+      },
+      "responsive": false,
+      "description": "main-axis distribution: start"
+    },
+    {
+      "name": "justify-center",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "justify-content": "center"
+      },
+      "responsive": false,
+      "description": "main-axis distribution: center"
+    },
+    {
+      "name": "justify-end",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "justify-content": "flex-end"
+      },
+      "responsive": false,
+      "description": "main-axis distribution: end"
+    },
+    {
+      "name": "justify-between",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "justify-content": "space-between"
+      },
+      "responsive": false,
+      "description": "main-axis distribution: between"
+    },
+    {
+      "name": "justify-around",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "justify-content": "space-around"
+      },
+      "responsive": false,
+      "description": "main-axis distribution: around"
+    },
+    {
+      "name": "justify-evenly",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "justify-content": "space-evenly"
+      },
+      "responsive": false,
+      "description": "main-axis distribution: evenly"
+    },
+    {
+      "name": "wrap",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "flex-wrap": "wrap",
+        "white-space": "normal"
+      },
+      "responsive": false,
+      "description": "allow wrapping (flex children and text)"
+    },
+    {
+      "name": "nowrap",
+      "group": "alignment",
+      "kind": "utility",
+      "css": {
+        "flex-wrap": "nowrap",
+        "white-space": "nowrap"
+      },
+      "responsive": false,
+      "description": "forbid wrapping (flex children and text)"
+    },
+    {
+      "name": "padding-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "padding, size 0"
+    },
+    {
+      "name": "padding-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "padding, size xs"
+    },
+    {
+      "name": "padding-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "padding, size s"
+    },
+    {
+      "name": "padding-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "padding, size m"
+    },
+    {
+      "name": "padding-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "padding, size l"
+    },
+    {
+      "name": "padding-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "padding, size xl"
+    },
+    {
+      "name": "padding-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "padding, size 2xl"
+    },
+    {
+      "name": "padding-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "padding, size 3xl"
+    },
+    {
+      "name": "padding-x-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size 0"
+    },
+    {
+      "name": "padding-x-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size xs"
+    },
+    {
+      "name": "padding-x-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size s"
+    },
+    {
+      "name": "padding-x-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size m"
+    },
+    {
+      "name": "padding-x-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size l"
+    },
+    {
+      "name": "padding-x-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size xl"
+    },
+    {
+      "name": "padding-x-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size 2xl"
+    },
+    {
+      "name": "padding-x-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "horizontal padding, size 3xl"
+    },
+    {
+      "name": "padding-y-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size 0"
+    },
+    {
+      "name": "padding-y-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size xs"
+    },
+    {
+      "name": "padding-y-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size s"
+    },
+    {
+      "name": "padding-y-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size m"
+    },
+    {
+      "name": "padding-y-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size l"
+    },
+    {
+      "name": "padding-y-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size xl"
+    },
+    {
+      "name": "padding-y-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size 2xl"
+    },
+    {
+      "name": "padding-y-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "vertical padding, size 3xl"
+    },
+    {
+      "name": "padding-top-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "top padding, size 0"
+    },
+    {
+      "name": "padding-top-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "top padding, size xs"
+    },
+    {
+      "name": "padding-top-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "top padding, size s"
+    },
+    {
+      "name": "padding-top-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "top padding, size m"
+    },
+    {
+      "name": "padding-top-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "top padding, size l"
+    },
+    {
+      "name": "padding-top-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "top padding, size xl"
+    },
+    {
+      "name": "padding-top-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "top padding, size 2xl"
+    },
+    {
+      "name": "padding-top-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-start": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "top padding, size 3xl"
+    },
+    {
+      "name": "padding-bottom-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size 0"
+    },
+    {
+      "name": "padding-bottom-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size xs"
+    },
+    {
+      "name": "padding-bottom-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size s"
+    },
+    {
+      "name": "padding-bottom-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size m"
+    },
+    {
+      "name": "padding-bottom-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size l"
+    },
+    {
+      "name": "padding-bottom-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size xl"
+    },
+    {
+      "name": "padding-bottom-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size 2xl"
+    },
+    {
+      "name": "padding-bottom-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-block-end": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "bottom padding, size 3xl"
+    },
+    {
+      "name": "padding-left-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "left padding, size 0"
+    },
+    {
+      "name": "padding-left-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "left padding, size xs"
+    },
+    {
+      "name": "padding-left-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "left padding, size s"
+    },
+    {
+      "name": "padding-left-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "left padding, size m"
+    },
+    {
+      "name": "padding-left-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "left padding, size l"
+    },
+    {
+      "name": "padding-left-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "left padding, size xl"
+    },
+    {
+      "name": "padding-left-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "left padding, size 2xl"
+    },
+    {
+      "name": "padding-left-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-start": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "left padding, size 3xl"
+    },
+    {
+      "name": "padding-right-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "right padding, size 0"
+    },
+    {
+      "name": "padding-right-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "right padding, size xs"
+    },
+    {
+      "name": "padding-right-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "right padding, size s"
+    },
+    {
+      "name": "padding-right-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "right padding, size m"
+    },
+    {
+      "name": "padding-right-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "right padding, size l"
+    },
+    {
+      "name": "padding-right-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "right padding, size xl"
+    },
+    {
+      "name": "padding-right-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "right padding, size 2xl"
+    },
+    {
+      "name": "padding-right-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding-inline-end": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "right padding, size 3xl"
+    },
+    {
+      "name": "margin-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "margin, size 0"
+    },
+    {
+      "name": "margin-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "margin, size xs"
+    },
+    {
+      "name": "margin-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "margin, size s"
+    },
+    {
+      "name": "margin-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "margin, size m"
+    },
+    {
+      "name": "margin-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "margin, size l"
+    },
+    {
+      "name": "margin-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "margin, size xl"
+    },
+    {
+      "name": "margin-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "margin, size 2xl"
+    },
+    {
+      "name": "margin-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "margin, size 3xl"
+    },
+    {
+      "name": "margin-auto",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "auto"
+      },
+      "responsive": false,
+      "description": "margin auto"
+    },
+    {
+      "name": "margin-x-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size 0"
+    },
+    {
+      "name": "margin-x-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size xs"
+    },
+    {
+      "name": "margin-x-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size s"
+    },
+    {
+      "name": "margin-x-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size m"
+    },
+    {
+      "name": "margin-x-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size l"
+    },
+    {
+      "name": "margin-x-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size xl"
+    },
+    {
+      "name": "margin-x-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size 2xl"
+    },
+    {
+      "name": "margin-x-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "horizontal margin, size 3xl"
+    },
+    {
+      "name": "margin-x-auto",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline": "auto"
+      },
+      "responsive": false,
+      "description": "horizontal margin auto"
+    },
+    {
+      "name": "margin-y-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size 0"
+    },
+    {
+      "name": "margin-y-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size xs"
+    },
+    {
+      "name": "margin-y-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size s"
+    },
+    {
+      "name": "margin-y-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size m"
+    },
+    {
+      "name": "margin-y-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size l"
+    },
+    {
+      "name": "margin-y-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size xl"
+    },
+    {
+      "name": "margin-y-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size 2xl"
+    },
+    {
+      "name": "margin-y-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "vertical margin, size 3xl"
+    },
+    {
+      "name": "margin-y-auto",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block": "auto"
+      },
+      "responsive": false,
+      "description": "vertical margin auto"
+    },
+    {
+      "name": "margin-top-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "top margin, size 0"
+    },
+    {
+      "name": "margin-top-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "top margin, size xs"
+    },
+    {
+      "name": "margin-top-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "top margin, size s"
+    },
+    {
+      "name": "margin-top-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "top margin, size m"
+    },
+    {
+      "name": "margin-top-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "top margin, size l"
+    },
+    {
+      "name": "margin-top-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "top margin, size xl"
+    },
+    {
+      "name": "margin-top-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "top margin, size 2xl"
+    },
+    {
+      "name": "margin-top-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "top margin, size 3xl"
+    },
+    {
+      "name": "margin-top-auto",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-start": "auto"
+      },
+      "responsive": false,
+      "description": "top margin auto"
+    },
+    {
+      "name": "margin-bottom-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size 0"
+    },
+    {
+      "name": "margin-bottom-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size xs"
+    },
+    {
+      "name": "margin-bottom-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size s"
+    },
+    {
+      "name": "margin-bottom-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size m"
+    },
+    {
+      "name": "margin-bottom-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size l"
+    },
+    {
+      "name": "margin-bottom-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size xl"
+    },
+    {
+      "name": "margin-bottom-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size 2xl"
+    },
+    {
+      "name": "margin-bottom-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "bottom margin, size 3xl"
+    },
+    {
+      "name": "margin-bottom-auto",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-block-end": "auto"
+      },
+      "responsive": false,
+      "description": "bottom margin auto"
+    },
+    {
+      "name": "margin-left-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "left margin, size 0"
+    },
+    {
+      "name": "margin-left-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "left margin, size xs"
+    },
+    {
+      "name": "margin-left-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "left margin, size s"
+    },
+    {
+      "name": "margin-left-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "left margin, size m"
+    },
+    {
+      "name": "margin-left-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "left margin, size l"
+    },
+    {
+      "name": "margin-left-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "left margin, size xl"
+    },
+    {
+      "name": "margin-left-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "left margin, size 2xl"
+    },
+    {
+      "name": "margin-left-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "left margin, size 3xl"
+    },
+    {
+      "name": "margin-left-auto",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-start": "auto"
+      },
+      "responsive": false,
+      "description": "left margin auto"
+    },
+    {
+      "name": "margin-right-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "right margin, size 0"
+    },
+    {
+      "name": "margin-right-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "right margin, size xs"
+    },
+    {
+      "name": "margin-right-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "right margin, size s"
+    },
+    {
+      "name": "margin-right-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "right margin, size m"
+    },
+    {
+      "name": "margin-right-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "right margin, size l"
+    },
+    {
+      "name": "margin-right-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "right margin, size xl"
+    },
+    {
+      "name": "margin-right-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "right margin, size 2xl"
+    },
+    {
+      "name": "margin-right-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "right margin, size 3xl"
+    },
+    {
+      "name": "margin-right-auto",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin-inline-end": "auto"
+      },
+      "responsive": false,
+      "description": "right margin auto"
+    },
+    {
+      "name": "gap-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "gap, size 0"
+    },
+    {
+      "name": "gap-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "gap, size xs"
+    },
+    {
+      "name": "gap-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "gap, size s"
+    },
+    {
+      "name": "gap-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "gap, size m"
+    },
+    {
+      "name": "gap-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "gap, size l"
+    },
+    {
+      "name": "gap-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "gap, size xl"
+    },
+    {
+      "name": "gap-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "gap, size 2xl"
+    },
+    {
+      "name": "gap-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "gap, size 3xl"
+    },
+    {
+      "name": "gap-x-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size 0"
+    },
+    {
+      "name": "gap-x-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size xs"
+    },
+    {
+      "name": "gap-x-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size s"
+    },
+    {
+      "name": "gap-x-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size m"
+    },
+    {
+      "name": "gap-x-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size l"
+    },
+    {
+      "name": "gap-x-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size xl"
+    },
+    {
+      "name": "gap-x-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size 2xl"
+    },
+    {
+      "name": "gap-x-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "column-gap": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "horizontal gap, size 3xl"
+    },
+    {
+      "name": "gap-y-0",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-0)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size 0"
+    },
+    {
+      "name": "gap-y-xs",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-xs)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size xs"
+    },
+    {
+      "name": "gap-y-s",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-s)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size s"
+    },
+    {
+      "name": "gap-y-m",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size m"
+    },
+    {
+      "name": "gap-y-l",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-l)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size l"
+    },
+    {
+      "name": "gap-y-xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-xl)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size xl"
+    },
+    {
+      "name": "gap-y-2xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-2xl)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size 2xl"
+    },
+    {
+      "name": "gap-y-3xl",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "row-gap": "var(--space-3xl)"
+      },
+      "responsive": false,
+      "description": "vertical gap, size 3xl"
+    },
+    {
+      "name": "padding",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "padding": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "padding, size m"
+    },
+    {
+      "name": "margin",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "margin": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "margin, size m"
+    },
+    {
+      "name": "gap",
+      "group": "spacing",
+      "kind": "utility",
+      "css": {
+        "gap": "var(--space-m)"
+      },
+      "responsive": false,
+      "description": "gap, size m"
+    },
+    {
+      "name": "text-xs",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-xs)"
+      },
+      "responsive": false,
+      "description": "font size xs"
+    },
+    {
+      "name": "text-s",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-s)"
+      },
+      "responsive": false,
+      "description": "font size s"
+    },
+    {
+      "name": "text-m",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-m)"
+      },
+      "responsive": false,
+      "description": "font size m"
+    },
+    {
+      "name": "text-l",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-l)"
+      },
+      "responsive": false,
+      "description": "font size l"
+    },
+    {
+      "name": "text-xl",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-xl)"
+      },
+      "responsive": false,
+      "description": "font size xl"
+    },
+    {
+      "name": "text-2xl",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-2xl)"
+      },
+      "responsive": false,
+      "description": "font size 2xl"
+    },
+    {
+      "name": "text-3xl",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-3xl)"
+      },
+      "responsive": false,
+      "description": "font size 3xl"
+    },
+    {
+      "name": "text-4xl",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-size": "var(--text-4xl)"
+      },
+      "responsive": false,
+      "description": "font size 4xl"
+    },
+    {
+      "name": "text-left",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-align": "start"
+      },
+      "responsive": true,
+      "description": "align text to the start (left in LTR)"
+    },
+    {
+      "name": "text-center",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-align": "center"
+      },
+      "responsive": true,
+      "description": "centre text"
+    },
+    {
+      "name": "text-right",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-align": "end"
+      },
+      "responsive": true,
+      "description": "align text to the end (right in LTR)"
+    },
+    {
+      "name": "font-sans",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-family": "var(--font)"
+      },
+      "responsive": false,
+      "description": "sans-serif family"
+    },
+    {
+      "name": "font-serif",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-family": "var(--font-serif)"
+      },
+      "responsive": false,
+      "description": "serif family"
+    },
+    {
+      "name": "font-mono",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-family": "var(--font-mono)"
+      },
+      "responsive": false,
+      "description": "monospace family"
+    },
+    {
+      "name": "light",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-weight": "300"
+      },
+      "responsive": false,
+      "description": "font weight 300"
+    },
+    {
+      "name": "regular",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-weight": "400"
+      },
+      "responsive": false,
+      "description": "font weight 400"
+    },
+    {
+      "name": "medium",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-weight": "500"
+      },
+      "responsive": false,
+      "description": "font weight 500"
+    },
+    {
+      "name": "semibold",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-weight": "600"
+      },
+      "responsive": false,
+      "description": "font weight 600"
+    },
+    {
+      "name": "bold",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-weight": "700"
+      },
+      "responsive": false,
+      "description": "font weight 700"
+    },
+    {
+      "name": "italic",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-style": "italic"
+      },
+      "responsive": false,
+      "description": "italic"
+    },
+    {
+      "name": "uppercase",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-transform": "uppercase"
+      },
+      "responsive": false,
+      "description": "uppercase"
+    },
+    {
+      "name": "lowercase",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-transform": "lowercase"
+      },
+      "responsive": false,
+      "description": "lowercase"
+    },
+    {
+      "name": "capitalize",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-transform": "capitalize"
+      },
+      "responsive": false,
+      "description": "capitalise each word"
+    },
+    {
+      "name": "underline",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-decoration": "underline"
+      },
+      "responsive": false,
+      "description": "underline"
+    },
+    {
+      "name": "strike",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-decoration": "line-through"
+      },
+      "responsive": false,
+      "description": "strike through"
+    },
+    {
+      "name": "tabular",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "font-variant-numeric": "tabular-nums"
+      },
+      "responsive": false,
+      "description": "equal-width digits"
+    },
+    {
+      "name": "truncate",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "overflow": "hidden",
+        "text-overflow": "ellipsis",
+        "white-space": "nowrap"
+      },
+      "responsive": false,
+      "description": "one line, ellipsis when too long"
+    },
+    {
+      "name": "lines-2",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "display": "-webkit-box",
+        "-webkit-box-orient": "vertical",
+        "-webkit-line-clamp": "2",
+        "overflow": "hidden"
+      },
+      "responsive": false,
+      "description": "clamp to 2 lines"
+    },
+    {
+      "name": "lines-3",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "display": "-webkit-box",
+        "-webkit-box-orient": "vertical",
+        "-webkit-line-clamp": "3",
+        "overflow": "hidden"
+      },
+      "responsive": false,
+      "description": "clamp to 3 lines"
+    },
+    {
+      "name": "balance",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-wrap": "balance"
+      },
+      "responsive": false,
+      "description": "balanced line lengths (headings)"
+    },
+    {
+      "name": "pretty",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "text-wrap": "pretty"
+      },
+      "responsive": false,
+      "description": "avoid orphans (paragraphs)"
+    },
+    {
+      "name": "leading-tight",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "line-height": "1.2"
+      },
+      "responsive": false,
+      "description": "line height 1.2"
+    },
+    {
+      "name": "leading-normal",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "line-height": "1.5"
+      },
+      "responsive": false,
+      "description": "line height 1.5"
+    },
+    {
+      "name": "leading-loose",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "line-height": "1.75"
+      },
+      "responsive": false,
+      "description": "line height 1.75"
+    },
+    {
+      "name": "tracking-tight",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "letter-spacing": "-0.02em"
+      },
+      "responsive": false,
+      "description": "tighter letter spacing"
+    },
+    {
+      "name": "tracking-normal",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "letter-spacing": "0"
+      },
+      "responsive": false,
+      "description": "normal letter spacing"
+    },
+    {
+      "name": "tracking-wide",
+      "group": "typography",
+      "kind": "utility",
+      "css": {
+        "letter-spacing": "0.05em"
+      },
+      "responsive": false,
+      "description": "wider letter spacing"
+    },
+    {
+      "name": "color-primary",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "color": "var(--primary)"
+      },
+      "responsive": false,
+      "description": "text colour: primary"
+    },
+    {
+      "name": "bg-primary",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--primary)",
+        "color": "var(--on-primary)"
+      },
+      "responsive": false,
+      "description": "solid primary background with readable text colour"
+    },
+    {
+      "name": "bg-primary-soft",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--primary-soft)",
+        "color": "var(--primary-text)"
+      },
+      "responsive": false,
+      "description": "light primary tint with matching text colour"
+    },
+    {
+      "name": "border-primary",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "border-color": "var(--primary)"
+      },
+      "responsive": false,
+      "description": "border colour: primary"
+    },
+    {
+      "name": "color-success",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "color": "var(--success)"
+      },
+      "responsive": false,
+      "description": "text colour: success"
+    },
+    {
+      "name": "bg-success",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--success)",
+        "color": "var(--on-success)"
+      },
+      "responsive": false,
+      "description": "solid success background with readable text colour"
+    },
+    {
+      "name": "bg-success-soft",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--success-soft)",
+        "color": "var(--success-text)"
+      },
+      "responsive": false,
+      "description": "light success tint with matching text colour"
+    },
+    {
+      "name": "border-success",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "border-color": "var(--success)"
+      },
+      "responsive": false,
+      "description": "border colour: success"
+    },
+    {
+      "name": "color-warning",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "color": "var(--warning)"
+      },
+      "responsive": false,
+      "description": "text colour: warning"
+    },
+    {
+      "name": "bg-warning",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--warning)",
+        "color": "var(--on-warning)"
+      },
+      "responsive": false,
+      "description": "solid warning background with readable text colour"
+    },
+    {
+      "name": "bg-warning-soft",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--warning-soft)",
+        "color": "var(--warning-text)"
+      },
+      "responsive": false,
+      "description": "light warning tint with matching text colour"
+    },
+    {
+      "name": "border-warning",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "border-color": "var(--warning)"
+      },
+      "responsive": false,
+      "description": "border colour: warning"
+    },
+    {
+      "name": "color-danger",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "color": "var(--danger)"
+      },
+      "responsive": false,
+      "description": "text colour: danger"
+    },
+    {
+      "name": "bg-danger",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--danger)",
+        "color": "var(--on-danger)"
+      },
+      "responsive": false,
+      "description": "solid danger background with readable text colour"
+    },
+    {
+      "name": "bg-danger-soft",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--danger-soft)",
+        "color": "var(--danger-text)"
+      },
+      "responsive": false,
+      "description": "light danger tint with matching text colour"
+    },
+    {
+      "name": "border-danger",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "border-color": "var(--danger)"
+      },
+      "responsive": false,
+      "description": "border colour: danger"
+    },
+    {
+      "name": "color-info",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "color": "var(--info)"
+      },
+      "responsive": false,
+      "description": "text colour: info"
+    },
+    {
+      "name": "bg-info",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--info)",
+        "color": "var(--on-info)"
+      },
+      "responsive": false,
+      "description": "solid info background with readable text colour"
+    },
+    {
+      "name": "bg-info-soft",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--info-soft)",
+        "color": "var(--info-text)"
+      },
+      "responsive": false,
+      "description": "light info tint with matching text colour"
+    },
+    {
+      "name": "border-info",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "border-color": "var(--info)"
+      },
+      "responsive": false,
+      "description": "border colour: info"
+    },
+    {
+      "name": "color-text",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "color": "var(--text)"
+      },
+      "responsive": false,
+      "description": "default text colour"
+    },
+    {
+      "name": "color-muted",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "color": "var(--muted)"
+      },
+      "responsive": false,
+      "description": "muted text colour"
+    },
+    {
+      "name": "bg-page",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--bg-page)"
+      },
+      "responsive": false,
+      "description": "page background"
+    },
+    {
+      "name": "bg-surface",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--bg-surface)"
+      },
+      "responsive": false,
+      "description": "surface background (cards, panels)"
+    },
+    {
+      "name": "bg-subtle",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "var(--bg-subtle)"
+      },
+      "responsive": false,
+      "description": "subtle background"
+    },
+    {
+      "name": "bg-transparent",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "background": "transparent"
+      },
+      "responsive": false,
+      "description": "transparent background"
+    },
+    {
+      "name": "opacity-0",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "opacity": "0"
+      },
+      "responsive": false,
+      "description": "opacity 0%"
+    },
+    {
+      "name": "opacity-25",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "opacity": "0.25"
+      },
+      "responsive": false,
+      "description": "opacity 25%"
+    },
+    {
+      "name": "opacity-50",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "opacity": "0.5"
+      },
+      "responsive": false,
+      "description": "opacity 50%"
+    },
+    {
+      "name": "opacity-75",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "opacity": "0.75"
+      },
+      "responsive": false,
+      "description": "opacity 75%"
+    },
+    {
+      "name": "opacity-100",
+      "group": "color",
+      "kind": "utility",
+      "css": {
+        "opacity": "1"
+      },
+      "responsive": false,
+      "description": "opacity 100%"
+    },
+    {
+      "name": "border",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border": "1px solid var(--border)"
+      },
+      "responsive": false,
+      "description": "1px border"
+    },
+    {
+      "name": "border-top",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-block-start": "1px solid var(--border)"
+      },
+      "responsive": false,
+      "description": "top border"
+    },
+    {
+      "name": "border-bottom",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-block-end": "1px solid var(--border)"
+      },
+      "responsive": false,
+      "description": "bottom border"
+    },
+    {
+      "name": "border-left",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-inline-start": "1px solid var(--border)"
+      },
+      "responsive": false,
+      "description": "left border"
+    },
+    {
+      "name": "border-right",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-inline-end": "1px solid var(--border)"
+      },
+      "responsive": false,
+      "description": "right border"
+    },
+    {
+      "name": "border-0",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border": "0"
+      },
+      "responsive": false,
+      "description": "no border"
+    },
+    {
+      "name": "rounded",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-radius": "var(--radius)"
+      },
+      "responsive": false,
+      "description": "radius m"
+    },
+    {
+      "name": "rounded-0",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-radius": "0"
+      },
+      "responsive": false,
+      "description": "square corners"
+    },
+    {
+      "name": "rounded-s",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-radius": "calc(var(--radius) / 2)"
+      },
+      "responsive": false,
+      "description": "radius s"
+    },
+    {
+      "name": "rounded-l",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-radius": "calc(var(--radius) * 1.5)"
+      },
+      "responsive": false,
+      "description": "radius l"
+    },
+    {
+      "name": "rounded-xl",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-radius": "calc(var(--radius) * 2)"
+      },
+      "responsive": false,
+      "description": "radius xl"
+    },
+    {
+      "name": "rounded-full",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "border-radius": "9999px"
+      },
+      "responsive": false,
+      "description": "pill / circle"
+    },
+    {
+      "name": "shadow",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "box-shadow": "var(--shadow-m)"
+      },
+      "responsive": false,
+      "description": "shadow m"
+    },
+    {
+      "name": "shadow-0",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "box-shadow": "none"
+      },
+      "responsive": false,
+      "description": "no shadow"
+    },
+    {
+      "name": "shadow-s",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "box-shadow": "var(--shadow-s)"
+      },
+      "responsive": false,
+      "description": "shadow s"
+    },
+    {
+      "name": "shadow-l",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "box-shadow": "var(--shadow-l)"
+      },
+      "responsive": false,
+      "description": "shadow l"
+    },
+    {
+      "name": "shadow-xl",
+      "group": "box",
+      "kind": "utility",
+      "css": {
+        "box-shadow": "var(--shadow-xl)"
+      },
+      "responsive": false,
+      "description": "shadow xl"
+    },
+    {
+      "name": "width-full",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "inline-size": "100%"
+      },
+      "responsive": false,
+      "description": "width 100%"
+    },
+    {
+      "name": "width-auto",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "inline-size": "auto"
+      },
+      "responsive": false,
+      "description": "width auto"
+    },
+    {
+      "name": "width-fit",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "inline-size": "fit-content"
+      },
+      "responsive": false,
+      "description": "width fits content"
+    },
+    {
+      "name": "width-screen",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "inline-size": "100vw"
+      },
+      "responsive": false,
+      "description": "width of the viewport"
+    },
+    {
+      "name": "height-full",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "block-size": "100%"
+      },
+      "responsive": false,
+      "description": "height 100%"
+    },
+    {
+      "name": "height-auto",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "block-size": "auto"
+      },
+      "responsive": false,
+      "description": "height auto"
+    },
+    {
+      "name": "height-screen",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "block-size": "100dvh"
+      },
+      "responsive": false,
+      "description": "height of the viewport"
+    },
+    {
+      "name": "min-height-screen",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "min-block-size": "100dvh"
+      },
+      "responsive": false,
+      "description": "at least viewport height"
+    },
+    {
+      "name": "min-width-0",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "min-inline-size": "0"
+      },
+      "responsive": false,
+      "description": "allow a flex or grid child to shrink below its content"
+    },
+    {
+      "name": "max-width-s",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "max-inline-size": "24rem"
+      },
+      "responsive": false,
+      "description": "max width 24rem"
+    },
+    {
+      "name": "max-width-m",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "max-inline-size": "40rem"
+      },
+      "responsive": false,
+      "description": "max width 40rem"
+    },
+    {
+      "name": "max-width-l",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "max-inline-size": "56rem"
+      },
+      "responsive": false,
+      "description": "max width 56rem"
+    },
+    {
+      "name": "max-width-xl",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "max-inline-size": "72rem"
+      },
+      "responsive": false,
+      "description": "max width 72rem"
+    },
+    {
+      "name": "max-width-prose",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "max-inline-size": "var(--measure)"
+      },
+      "responsive": false,
+      "description": "max width for readable text (65ch)"
+    },
+    {
+      "name": "max-width-full",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "max-inline-size": "100%"
+      },
+      "responsive": false,
+      "description": "max width 100%"
+    },
+    {
+      "name": "max-width-none",
+      "group": "sizing",
+      "kind": "utility",
+      "css": {
+        "max-inline-size": "none"
+      },
+      "responsive": false,
+      "description": "no max width"
+    },
+    {
+      "name": "hidden",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "display": "none"
+      },
+      "responsive": true,
+      "description": "not displayed"
+    },
+    {
+      "name": "block",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "display": "block"
+      },
+      "responsive": true,
+      "description": "block"
+    },
+    {
+      "name": "inline",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "display": "inline"
+      },
+      "responsive": false,
+      "description": "inline"
+    },
+    {
+      "name": "inline-block",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "display": "inline-block"
+      },
+      "responsive": false,
+      "description": "inline block"
+    },
+    {
+      "name": "visually-hidden",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "position": "absolute",
+        "inline-size": "1px",
+        "block-size": "1px",
+        "padding": "0",
+        "margin": "-1px",
+        "overflow": "hidden",
+        "clip-path": "inset(50%)",
+        "white-space": "nowrap",
+        "border": "0"
+      },
+      "responsive": false,
+      "description": "hidden visually, read by screen readers"
+    },
+    {
+      "name": "overflow-hidden",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "overflow": "hidden"
+      },
+      "responsive": false,
+      "description": "clip overflow"
+    },
+    {
+      "name": "overflow-auto",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "overflow": "auto"
+      },
+      "responsive": false,
+      "description": "scroll when needed"
+    },
+    {
+      "name": "overflow-visible",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "overflow": "visible"
+      },
+      "responsive": false,
+      "description": "show overflow"
+    },
+    {
+      "name": "overflow-x-auto",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "overflow-x": "auto"
+      },
+      "responsive": false,
+      "description": "horizontal scroll when needed"
+    },
+    {
+      "name": "overflow-y-auto",
+      "group": "display",
+      "kind": "utility",
+      "css": {
+        "overflow-y": "auto"
+      },
+      "responsive": false,
+      "description": "vertical scroll when needed"
+    },
+    {
+      "name": "relative",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "position": "relative"
+      },
+      "responsive": false,
+      "description": "position relative"
+    },
+    {
+      "name": "absolute",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "position": "absolute"
+      },
+      "responsive": false,
+      "description": "position absolute"
+    },
+    {
+      "name": "fixed",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "position": "fixed"
+      },
+      "responsive": false,
+      "description": "position fixed"
+    },
+    {
+      "name": "sticky",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "position": "sticky"
+      },
+      "responsive": false,
+      "description": "position sticky"
+    },
+    {
+      "name": "static",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "position": "static"
+      },
+      "responsive": false,
+      "description": "position static"
+    },
+    {
+      "name": "inset-0",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "inset": "0"
+      },
+      "responsive": false,
+      "description": "all offsets 0"
+    },
+    {
+      "name": "top-0",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "inset-block-start": "0"
+      },
+      "responsive": false,
+      "description": "top 0"
+    },
+    {
+      "name": "right-0",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "inset-inline-end": "0"
+      },
+      "responsive": false,
+      "description": "right 0"
+    },
+    {
+      "name": "bottom-0",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "inset-block-end": "0"
+      },
+      "responsive": false,
+      "description": "bottom 0"
+    },
+    {
+      "name": "left-0",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "inset-inline-start": "0"
+      },
+      "responsive": false,
+      "description": "left 0"
+    },
+    {
+      "name": "z-below",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "z-index": "-1"
+      },
+      "responsive": false,
+      "description": "behind siblings"
+    },
+    {
+      "name": "z-above",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "z-index": "10"
+      },
+      "responsive": false,
+      "description": "above siblings"
+    },
+    {
+      "name": "z-top",
+      "group": "position",
+      "kind": "utility",
+      "css": {
+        "z-index": "1000"
+      },
+      "responsive": false,
+      "description": "above everything"
+    },
+    {
+      "name": "pointer",
+      "group": "interaction",
+      "kind": "utility",
+      "css": {
+        "cursor": "pointer"
+      },
+      "responsive": false,
+      "description": "pointer cursor"
+    },
+    {
+      "name": "transition",
+      "group": "interaction",
+      "kind": "utility",
+      "css": {
+        "transition": "color var(--transition), background-color var(--transition), border-color var(--transition), opacity var(--transition), transform var(--transition), translate var(--transition), box-shadow var(--transition)"
+      },
+      "responsive": false,
+      "description": "smooth colour, opacity, transform and shadow changes"
+    },
+    {
+      "name": "select-none",
+      "group": "interaction",
+      "kind": "utility",
+      "css": {
+        "user-select": "none"
+      },
+      "responsive": false,
+      "description": "text cannot be selected"
+    },
+    {
+      "name": "button",
+      "group": "component",
+      "kind": "component",
+      "responsive": false,
+      "description": "button look for <a> (a <button> needs no class)"
+    },
+    {
+      "name": "card",
+      "group": "component",
+      "kind": "component",
+      "responsive": false,
+      "description": "surface panel with border, radius, padding"
+    },
+    {
+      "name": "badge",
+      "group": "component",
+      "kind": "component",
+      "responsive": false,
+      "description": "small label; add a role"
+    },
+    {
+      "name": "alert",
+      "group": "component",
+      "kind": "component",
+      "responsive": false,
+      "description": "message box; add a role"
+    },
+    {
+      "name": "prose",
+      "group": "component",
+      "kind": "component",
+      "responsive": false,
+      "description": "long-form text: measure, rhythm, headings, lists"
+    },
+    {
+      "name": "switch",
+      "group": "component",
+      "kind": "component",
+      "responsive": false,
+      "description": "toggle switch on input[type=checkbox]"
+    },
+    {
+      "name": "icon",
+      "group": "component",
+      "kind": "component",
+      "responsive": false,
+      "description": "1em icon in the current text colour on svg"
+    },
+    {
+      "name": "primary",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        "button",
+        ".button",
+        ".badge",
+        ".alert"
+      ],
+      "responsive": false,
+      "description": "primary role"
+    },
+    {
+      "name": "ghost",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        "button",
+        ".button"
+      ],
+      "responsive": false,
+      "description": "no background or border"
+    },
+    {
+      "name": "danger",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        "button",
+        ".button",
+        ".badge",
+        ".alert"
+      ],
+      "responsive": false,
+      "description": "danger role"
+    },
+    {
+      "name": "small",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        "button",
+        ".button"
+      ],
+      "responsive": false,
+      "description": "smaller size"
+    },
+    {
+      "name": "large",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        "button",
+        ".button"
+      ],
+      "responsive": false,
+      "description": "larger size"
+    },
+    {
+      "name": "success",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        ".badge",
+        ".alert"
+      ],
+      "responsive": false,
+      "description": "success role"
+    },
+    {
+      "name": "warning",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        ".badge",
+        ".alert"
+      ],
+      "responsive": false,
+      "description": "warning role"
+    },
+    {
+      "name": "info",
+      "group": "component",
+      "kind": "modifier",
+      "appliesTo": [
+        ".badge",
+        ".alert"
+      ],
+      "responsive": false,
+      "description": "info role"
+    }
+  ],
+  "translations": {
+    "p-4": "padding-m",
+    "px-4": "padding-x-m",
+    "py-4": "padding-y-m",
+    "p-2": "padding-s",
+    "p-6": "padding-l",
+    "p-8": "padding-xl",
+    "m-4": "margin-m",
+    "mt-2": "margin-top-s",
+    "mt-4": "margin-top-m",
+    "mb-4": "margin-bottom-m",
+    "mx-auto": "margin-x-auto",
+    "ml-auto": "margin-left-auto",
+    "gap-2": "gap-s",
+    "gap-4": "gap-m",
+    "gap-6": "gap-l",
+    "gap-8": "gap-xl",
+    "w-full": "width-full",
+    "h-full": "height-full",
+    "h-screen": "height-screen",
+    "min-h-screen": "min-height-screen",
+    "max-w-prose": "max-width-prose",
+    "sr-only": "visually-hidden",
+    "font-bold": "bold",
+    "font-semibold": "semibold",
+    "font-medium": "medium",
+    "text-sm": "text-s",
+    "text-base": "text-m",
+    "text-lg": "text-l",
+    "rounded-lg": "rounded-l",
+    "rounded-md": "rounded",
+    "shadow-md": "shadow",
+    "shadow-lg": "shadow-l",
+    "items-center": "align-center",
+    "items-start": "align-start",
+    "items-end": "align-end",
+    "flex-col": "stack",
+    "flex-row": "row",
+    "flex-wrap": "wrap",
+    "flex-1": "grow",
+    "grid-cols-2": "cols-2",
+    "grid-cols-3": "cols-3",
+    "grid-cols-4": "cols-4",
+    "col-span-2": "span-2",
+    "col-span-full": "span-full",
+    "btn": "button",
+    "btn-primary": "primary",
+    "btn-danger": "danger",
+    "btn-sm": "small",
+    "btn-lg": "large",
+    "d-none": "hidden",
+    "d-block": "block",
+    "container-fluid": "container",
+    "text-muted": "color-muted",
+    "fw-bold": "bold"
+  }
+}

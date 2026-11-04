@@ -1,0 +1,81 @@
+/* Design tokens. Override on :root or any subtree. Derived tokens are computed from these. */
+:root {
+  color-scheme: light dark;
+
+  /* Role colours (any colour space; oklch recommended) */
+  --primary: oklch(55% 0.2 262);
+  --success: oklch(62% 0.17 150);
+  --warning: oklch(78% 0.16 80);
+  --danger: oklch(58% 0.21 25);
+  --info: oklch(62% 0.14 230);
+
+  /* Neutrals: both modes in one declaration */
+  --text: light-dark(oklch(20% 0.01 260), oklch(93% 0.01 260));
+  --muted: light-dark(oklch(48% 0.02 260), oklch(70% 0.02 260));
+  --border: light-dark(oklch(88% 0.01 260), oklch(32% 0.01 260));
+  --bg-page: light-dark(oklch(99% 0 0), oklch(16% 0.01 260));
+  --bg-surface: light-dark(oklch(100% 0 0), oklch(21% 0.01 260));
+  --bg-subtle: light-dark(oklch(96% 0.005 260), oklch(26% 0.01 260));
+
+  /* Type and shape */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --leading: 1.5;
+  --radius: 0.5rem;
+  --container: 72rem;
+  --measure: 65ch;
+  --transition: 150ms;
+
+  /* Space scale: l and above are fluid */
+  --space-0: 0;
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --space-xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --space-2xl: clamp(3rem, 2rem + 4vw, 5rem);
+  --space-3xl: clamp(4rem, 2.5rem + 6vw, 8rem);
+
+  /* Text scale: l and above are fluid */
+  --text-xs: 0.75rem;
+  --text-s: 0.875rem;
+  --text-m: 1rem;
+  --text-l: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-3xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --text-4xl: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+
+  /* Shadows */
+  --shadow-s: 0 1px 2px rgb(0 0 0 / 0.08);
+  --shadow-m: 0 2px 8px rgb(0 0 0 / 0.1);
+  --shadow-l: 0 8px 24px rgb(0 0 0 / 0.14);
+  --shadow-xl: 0 20px 48px rgb(0 0 0 / 0.2);
+
+  /* Derived: computed from the tokens above, not meant for override */
+  --ring: var(--primary);
+  --on-primary: white;
+  --on-success: white;
+  --on-warning: oklch(22% 0.03 80);
+  --on-danger: white;
+  --on-info: white;
+  --primary-soft: color-mix(in oklch, var(--primary) 14%, var(--bg-surface));
+  --success-soft: color-mix(in oklch, var(--success) 14%, var(--bg-surface));
+  --warning-soft: color-mix(in oklch, var(--warning) 18%, var(--bg-surface));
+  --danger-soft: color-mix(in oklch, var(--danger) 14%, var(--bg-surface));
+  --info-soft: color-mix(in oklch, var(--info) 14%, var(--bg-surface));
+  --primary-text: color-mix(in oklch, var(--primary) 72%, var(--text));
+  --success-text: color-mix(in oklch, var(--success) 60%, var(--text));
+  --warning-text: color-mix(in oklch, var(--warning) 40%, var(--text));
+  --danger-text: color-mix(in oklch, var(--danger) 72%, var(--text));
+  --info-text: color-mix(in oklch, var(--info) 64%, var(--text));
+  --primary-hover: color-mix(in oklch, var(--primary) 88%, black);
+  --success-hover: color-mix(in oklch, var(--success) 88%, black);
+  --warning-hover: color-mix(in oklch, var(--warning) 88%, black);
+  --danger-hover: color-mix(in oklch, var(--danger) 88%, black);
+  --info-hover: color-mix(in oklch, var(--info) 88%, black);
+}
+
+[data-theme="dark"] { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }

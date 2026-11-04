@@ -46,7 +46,8 @@
     "./vocab": "./dist/vocab.json",
     "./llms.txt": "./dist/llms.txt",
     "./types": {
-      "types": "./dist/kuwa.d.ts"
+      "types": "./dist/kuwa.d.ts",
+      "default": "./dist/cx.js"
     },
     "./package.json": "./package.json"
   },
@@ -63,6 +64,7 @@
   "devDependencies": {
     "axe-core": "^4.14.0",
     "gpt-tokenizer": "^4.1.0",
-    "lightningcss": "^1.33.0"
+    "lightningcss": "^1.33.0",
+    "playwright": "^1.63.0"
   }
 }
