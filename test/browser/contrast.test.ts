@@ -35,3 +35,25 @@ for (const scheme of ['light', 'dark'] as const) {
     assert.ok(c >= 3, `ring contrast ${c.toFixed(2)}`);
   });
 }
+
+const ROLE_HUE: Record<string, number> = { primary: 262, success: 150, warning: 80, danger: 25, info: 230 };
+/** Hue in degrees from a computed oklch() or oklab() colour string. */
+function hueOf(value: string): number | null {
+  const lch = /oklch\(([\d.]+%?) ([\d.]+) ([\d.]+)/.exec(value);
+  if (lch) return parseFloat(lch[3]);
+  const lab = /oklab\(([\d.]+%?) (-?[\d.]+) (-?[\d.]+)/.exec(value);
+  if (lab) return ((Math.atan2(parseFloat(lab[3]), parseFloat(lab[2])) * 180) / Math.PI + 360) % 360;
+  return null;
+}
+for (const scheme of ['light', 'dark'] as const) {
+  test(`${scheme}: soft tints keep their role hue`, async () => {
+    const page = await open({ file: 'kitchen-sink.html' }, { scheme });
+    for (const r of ROLES) {
+      const bg = await computed(page, `#badge-${r}`, 'background-color');
+      const hue = hueOf(bg);
+      assert.ok(hue !== null, `${r}: unexpected computed colour ${bg}`);
+      const diff = Math.min(Math.abs(hue! - ROLE_HUE[r]), 360 - Math.abs(hue! - ROLE_HUE[r]));
+      assert.ok(diff <= 45, `${scheme} ${r}: tint hue ${hue!.toFixed(0)} is ${diff.toFixed(0)} degrees from ${ROLE_HUE[r]}`);
+    }
+  });
+}

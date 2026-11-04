@@ -8,7 +8,7 @@
 }
 :where(body) { font-size: var(--text-m); }
 :where([data-theme]) { background: var(--bg-page); color: var(--text); }
-::selection { background: color-mix(in oklch, var(--primary) 30%, transparent); }
+::selection { background: color-mix(in oklab, var(--primary) 30%, transparent); }
 
 /* Flow rhythm: elements keep a bottom margin; layout primitives zero it for their children */
 :where(p, ul, ol, dl, blockquote, pre, table, figure, fieldset, details, address, hr, h1, h2, h3, h4, h5, h6) { margin-block: 0 var(--space-m); }

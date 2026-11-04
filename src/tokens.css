@@ -54,28 +54,28 @@
   --shadow-xl: 0 20px 48px rgb(0 0 0 / 0.2);
 
   /* Derived: computed from the tokens above, not meant for override */
-  --link: light-dark(var(--primary), color-mix(in oklch, var(--primary) 60%, white));
+  --link: light-dark(var(--primary), color-mix(in oklab, var(--primary) 60%, white));
   --ring: var(--link);
   --on-primary: white;
   --on-success: white;
   --on-warning: oklch(22% 0.03 80);
   --on-danger: white;
   --on-info: white;
-  --primary-soft: color-mix(in oklch, var(--primary) 14%, var(--bg-surface));
-  --success-soft: color-mix(in oklch, var(--success) 14%, var(--bg-surface));
-  --warning-soft: color-mix(in oklch, var(--warning) 18%, var(--bg-surface));
-  --danger-soft: color-mix(in oklch, var(--danger) 14%, var(--bg-surface));
-  --info-soft: color-mix(in oklch, var(--info) 14%, var(--bg-surface));
-  --primary-text: light-dark(color-mix(in oklch, var(--primary) 85%, black), color-mix(in oklch, var(--primary) 60%, white));
-  --success-text: light-dark(color-mix(in oklch, var(--success) 80%, black), color-mix(in oklch, var(--success) 60%, white));
-  --warning-text: light-dark(color-mix(in oklch, var(--warning) 45%, black), color-mix(in oklch, var(--warning) 80%, white));
-  --danger-text: light-dark(color-mix(in oklch, var(--danger) 80%, black), color-mix(in oklch, var(--danger) 60%, white));
-  --info-text: light-dark(color-mix(in oklch, var(--info) 85%, black), color-mix(in oklch, var(--info) 60%, white));
-  --primary-hover: color-mix(in oklch, var(--primary) 88%, black);
-  --success-hover: color-mix(in oklch, var(--success) 88%, black);
-  --warning-hover: color-mix(in oklch, var(--warning) 88%, black);
-  --danger-hover: color-mix(in oklch, var(--danger) 88%, black);
-  --info-hover: color-mix(in oklch, var(--info) 88%, black);
+  --primary-soft: color-mix(in oklab, var(--primary) 14%, var(--bg-surface));
+  --success-soft: color-mix(in oklab, var(--success) 14%, var(--bg-surface));
+  --warning-soft: color-mix(in oklab, var(--warning) 18%, var(--bg-surface));
+  --danger-soft: color-mix(in oklab, var(--danger) 14%, var(--bg-surface));
+  --info-soft: color-mix(in oklab, var(--info) 14%, var(--bg-surface));
+  --primary-text: light-dark(color-mix(in oklab, var(--primary) 85%, black), color-mix(in oklab, var(--primary) 60%, white));
+  --success-text: light-dark(color-mix(in oklab, var(--success) 80%, black), color-mix(in oklab, var(--success) 60%, white));
+  --warning-text: light-dark(color-mix(in oklab, var(--warning) 45%, black), color-mix(in oklab, var(--warning) 80%, white));
+  --danger-text: light-dark(color-mix(in oklab, var(--danger) 80%, black), color-mix(in oklab, var(--danger) 60%, white));
+  --info-text: light-dark(color-mix(in oklab, var(--info) 85%, black), color-mix(in oklab, var(--info) 60%, white));
+  --primary-hover: color-mix(in oklab, var(--primary) 88%, black);
+  --success-hover: color-mix(in oklab, var(--success) 88%, black);
+  --warning-hover: color-mix(in oklab, var(--warning) 88%, black);
+  --danger-hover: color-mix(in oklab, var(--danger) 88%, black);
+  --info-hover: color-mix(in oklab, var(--info) 88%, black);
 }
 
 [data-theme="dark"] { color-scheme: dark; }
