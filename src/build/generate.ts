@@ -15,26 +15,40 @@ function rule(name: string, css: Record<string, string>): string {
   return `.${escapeSelector(name)}{${decl(css)}}`;
 }
 
-/** Variant declarations: primitives drop `gap` so gap-* utilities keep winning at every breakpoint. */
-function variantCss(e: Entry): Record<string, string> {
-  if (e.kind !== 'primitive') return e.css!;
-  const { gap: _gap, ...rest } = e.css!;
-  return rest;
+/** Inside a primitive the primitive owns spacing: direct children lose their flow margins. */
+function ownChildren(selectors: string[]): string {
+  return `:where(${selectors.join(', ')}) > :where(*) { margin-block: 0 }`;
 }
 
+const isGap = (e: Entry) => e.group === 'spacing' && e.name.startsWith('gap');
+
+/**
+ * Order inside the utilities layer: utilities, then responsive blocks, then the gap utilities.
+ * Responsive primitive variants (m:row …) carry the primitive's gap; emitting gap-* last keeps
+ * `gap-s m:row` honouring gap-s at every breakpoint.
+ */
 export function utilitiesCss(list: Entry[]): string {
   const lines: string[] = [];
-  for (const e of list) if (e.kind === 'utility') lines.push(rule(e.name, e.css!));
+  for (const e of list) if (e.kind === 'utility' && !isGap(e)) lines.push(rule(e.name, e.css!));
   for (const [prefix, min] of Object.entries(PREFIXES)) {
     lines.push(`@media (min-width: ${min}) {`);
-    for (const e of list) if (responsiveSet.has(e.name) && e.css) lines.push(`  ${rule(`${prefix}:${e.name}`, variantCss(e))}`);
+    const prims: string[] = [];
+    for (const e of list) {
+      if (!responsiveSet.has(e.name) || !e.css) continue;
+      lines.push(`  ${rule(`${prefix}:${e.name}`, e.css)}`);
+      if (e.kind === 'primitive') prims.push(`.${escapeSelector(`${prefix}:${e.name}`)}`);
+    }
+    lines.push(`  ${ownChildren(prims)}`);
     lines.push('}');
   }
+  for (const e of list) if (e.kind === 'utility' && isGap(e)) lines.push(rule(e.name, e.css!));
   return `@layer kuwa.utilities {\n${lines.join('\n')}\n}\n`;
 }
 
 export function primitivesCss(list: Entry[]): string {
-  const lines = list.filter((e) => e.kind === 'primitive').map((e) => rule(e.name, e.css!));
+  const prims = list.filter((e) => e.kind === 'primitive');
+  const lines = prims.map((e) => rule(e.name, e.css!));
+  lines.push(ownChildren(prims.map((e) => `.${e.name}`)));
   return `@layer kuwa.layout {\n${lines.join('\n')}\n}\n`;
 }
 

@@ -13,7 +13,7 @@ for (const scheme of ['light', 'dark'] as const) {
       const c = contrast(await rgb(page, sel, 'color'), await bgOf(page, sel));
       if (c < min) failures.push(`${sel} ${c.toFixed(2)}`);
     };
-    for (const r of ROLES) for (const sel of [`#bg-${r}`, `#bg-${r}-soft`, `#badge-${r}`, `#alert-${r}`]) await check(sel);
+    for (const r of ROLES) for (const sel of [`#bg-${r}`, `#bg-${r}-soft`, `#badge-${r}`, `#alert-${r}`, `#bg-${r} a`, `#bg-${r}-soft a`, `#alert-${r} a`]) await check(sel);
     for (const sel of ['#badge-default', '#alert-default', '#btn-default', '#btn-primary', '#btn-ghost', '#btn-danger', '#btn-link',
       '#flow-p', '#surface', '#subtle', '#muted', '#link', '#card p', '#dark-section p', '#dark-section button', '#prose p']) await check(sel);
     assert.deepEqual(failures, [], `${scheme} contrast failures: ${failures.join(', ')}`);

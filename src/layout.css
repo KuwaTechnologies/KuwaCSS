@@ -1,7 +1,6 @@
 /* Child and descendant rules of the layout primitives. Container rules are generated from src/vocab.ts. */
 
-/* Inside a primitive the primitive owns spacing: flow margins are zeroed */
-:where(.stack, .row, .grid, .center, .cols-1, .cols-2, .cols-3, .cols-4, .sidebar, .sidebar-right, .switcher, .reel, .cover) > :where(*) { margin-block: 0; }
+/* The margin-zeroing rule for primitive children is generated next to the container rules. */
 
 /* sidebar: first child fixed, second fills; wraps below when the content would be narrower than half */
 .sidebar > :first-child { flex-basis: var(--side, 16rem); flex-grow: 1; }

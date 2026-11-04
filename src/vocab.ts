@@ -148,8 +148,8 @@ export function entries(): Entry[] {
   for (const r of ROLES) {
     out.push(
       u(`color-${r}`, 'color', { color: `var(--${r})` }, `text colour: ${r}`),
-      u(`bg-${r}`, 'color', { background: `var(--${r})`, color: `var(--on-${r})` }, `solid ${r} background with readable text colour`),
-      u(`bg-${r}-soft`, 'color', { background: `var(--${r}-soft)`, color: `var(--${r}-text)` }, `light ${r} tint with matching text colour`),
+      u(`bg-${r}`, 'color', { background: `var(--${r})`, color: `var(--on-${r})`, '--link': `var(--on-${r})`, '--ring': `var(--on-${r})` }, `solid ${r} background; text, links and focus rings become readable on it`),
+      u(`bg-${r}-soft`, 'color', { background: `var(--${r}-soft)`, color: `var(--${r}-text)`, '--link': `var(--${r}-text)` }, `light ${r} tint with matching text and link colour`),
       u(`border-${r}`, 'color', { 'border-color': `var(--${r})` }, `border colour: ${r}`),
     );
   }
@@ -172,12 +172,14 @@ export function entries(): Entry[] {
     u('border-right', 'box', { 'border-inline-end': '1px solid var(--border)' }, 'right border'),
     u('border-0', 'box', { border: '0' }, 'no border'),
     u('rounded', 'box', { 'border-radius': 'var(--radius)' }, 'radius m'),
+    u('rounded-m', 'box', { 'border-radius': 'var(--radius)' }, 'radius m (same as rounded)'),
     u('rounded-0', 'box', { 'border-radius': '0' }, 'square corners'),
     u('rounded-s', 'box', { 'border-radius': 'calc(var(--radius) / 2)' }, 'radius s'),
     u('rounded-l', 'box', { 'border-radius': 'calc(var(--radius) * 1.5)' }, 'radius l'),
     u('rounded-xl', 'box', { 'border-radius': 'calc(var(--radius) * 2)' }, 'radius xl'),
     u('rounded-full', 'box', { 'border-radius': '9999px' }, 'pill / circle'),
     u('shadow', 'box', { 'box-shadow': 'var(--shadow-m)' }, 'shadow m'),
+    u('shadow-m', 'box', { 'box-shadow': 'var(--shadow-m)' }, 'shadow m (same as shadow)'),
     u('shadow-0', 'box', { 'box-shadow': 'none' }, 'no shadow'),
     u('shadow-s', 'box', { 'box-shadow': 'var(--shadow-s)' }, 'shadow s'),
     u('shadow-l', 'box', { 'box-shadow': 'var(--shadow-l)' }, 'shadow l'),
@@ -271,5 +273,13 @@ export const TRANSLATIONS: Record<string, string> = {
   'items-center': 'align-center', 'items-start': 'align-start', 'items-end': 'align-end', 'flex-col': 'stack', 'flex-row': 'row', 'flex-wrap': 'wrap', 'flex-1': 'grow',
   'grid-cols-2': 'cols-2', 'grid-cols-3': 'cols-3', 'grid-cols-4': 'cols-4', 'col-span-2': 'span-2', 'col-span-full': 'span-full',
   'btn': 'button', 'btn-primary': 'primary', 'btn-danger': 'danger', 'btn-sm': 'small', 'btn-lg': 'large',
-  'd-none': 'hidden', 'd-block': 'block', 'container-fluid': 'container', 'text-muted': 'color-muted', 'fw-bold': 'bold',
+  'd-none': 'hidden', 'd-block': 'block', 'd-flex': 'row', 'd-grid': 'grid', 'd-inline': 'inline', 'd-inline-block': 'inline-block',
+  'container-fluid': 'container', 'text-muted': 'color-muted', 'fw-bold': 'bold', 'fw-semibold': 'semibold', 'btn-outline-primary': 'ghost',
+  'flex': 'row', 'inline-flex': 'row', 'flex-grow': 'grow', 'flex-shrink-0': 'shrink-0', 'items-stretch': 'align-stretch', 'items-baseline': 'align-baseline',
+  'whitespace-nowrap': 'nowrap', 'line-clamp-2': 'lines-2', 'line-clamp-3': 'lines-3', 'cursor-pointer': 'pointer',
+  'font-light': 'light', 'font-normal': 'regular', 'rounded-sm': 'rounded-s', 'rounded-none': 'rounded-0', 
+  'shadow-sm': 'shadow-s', 'shadow-none': 'shadow-0', 'border-t': 'border-top', 'border-b': 'border-bottom', 'border-l': 'border-left', 'border-r': 'border-right',
+  'bg-white': 'bg-surface', 'bg-gray-50': 'bg-subtle', 'bg-gray-100': 'bg-subtle', 'z-10': 'z-above', 'z-50': 'z-top', 'w-screen': 'width-screen', 'w-auto': 'width-auto', 'w-fit': 'width-fit', 'h-auto': 'height-auto',
+  'max-w-xs': 'max-width-s', 'max-w-sm': 'max-width-s', 'max-w-md': 'max-width-m', 'max-w-lg': 'max-width-m', 'max-w-xl': 'max-width-l', 'max-w-2xl': 'max-width-l', 'max-w-3xl': 'max-width-xl', 'max-w-4xl': 'max-width-xl', 'max-w-full': 'max-width-full', 'max-w-none': 'max-width-none',
+  'grid-cols-1': 'cols-1', 'col-span-3': 'span-3',
 };

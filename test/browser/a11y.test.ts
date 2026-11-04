@@ -6,7 +6,7 @@ import { open, computed, closeAll } from './helpers.ts';
 after(closeAll);
 const AXE = readFileSync(new URL('../../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8');
 
-for (const file of ['kitchen-sink.html', 'pricing.html']) {
+for (const file of ['kitchen-sink.html', 'pricing.html', '../cookbook/landing.html', '../cookbook/dashboard.html', '../cookbook/settings-form.html']) {
   for (const scheme of ['light', 'dark'] as const) {
     test(`${file} (${scheme}): no serious or critical axe violations`, async () => {
       const page = await open({ file }, { scheme });

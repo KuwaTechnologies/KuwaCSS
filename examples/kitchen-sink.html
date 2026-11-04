@@ -76,6 +76,8 @@ console.log(x);</code></pre>
       <div class="center bg-subtle rounded" id="center" style="height: 8rem"><span class="badge primary">centred</span></div>
       <div class="reel gap-m" id="reel" role="region" aria-label="Cards" tabindex="0"><div class="card" style="inline-size: 16rem">reel 1</div><div class="card" style="inline-size: 16rem">reel 2</div><div class="card" style="inline-size: 16rem">reel 3</div><div class="card" style="inline-size: 16rem">reel 4</div><div class="card" style="inline-size: 16rem">reel 5</div><div class="card" style="inline-size: 16rem">reel 6</div></div>
       <div class="hidden m:stack gap-s" id="hm"><p>Visible from tablet width</p><p>as a stack</p></div>
+      <div class="hidden m:stack" id="hm2"><p>Prefixed stack</p><p>without a gap class</p></div>
+      <div class="m:cols-2" id="mc"><p>Prefixed columns</p><p>without a gap class</p></div>
       <div class="row gap-s" id="shrink-wrap"><span class="badge shrink-0">label</span><p class="min-width-0 truncate" id="shrink">averyveryverylongunbrokenstringthatwouldotherwiseoverflowtheviewportandbreakthelayoutentirelyifnothingstoppedit_averyveryverylongunbrokenstringthatwouldotherwiseoverflowtheviewportandbreakthelayoutentirelyifnothingstoppedit</p></div>
     </section>
 
@@ -100,23 +102,23 @@ console.log(x);</code></pre>
       </div>
       <div class="stack gap-s">
         <div class="alert" id="alert-default" role="status">A neutral message.</div>
-        <div class="alert primary" id="alert-primary" role="status">A primary message.</div>
-        <div class="alert success" id="alert-success" role="status">Saved successfully.</div>
-        <div class="alert warning" id="alert-warning" role="status">Check your input.</div>
-        <div class="alert danger" id="alert-danger" role="alert">Something went wrong.</div>
-        <div class="alert info" id="alert-info" role="status">For your information.</div>
+        <div class="alert primary" id="alert-primary" role="status">A primary message. <a href="#">Details</a></div>
+        <div class="alert success" id="alert-success" role="status">Saved successfully. <a href="#">View</a></div>
+        <div class="alert warning" id="alert-warning" role="status">Check your input. <a href="#">Why?</a></div>
+        <div class="alert danger" id="alert-danger" role="alert">Something went wrong. <a href="#">Retry</a></div>
+        <div class="alert info" id="alert-info" role="status">For your information. <a href="#">More</a></div>
       </div>
       <div class="grid gap-m" style="--min: 12rem">
-        <div class="bg-primary padding rounded" id="bg-primary">bg-primary</div>
-        <div class="bg-success padding rounded" id="bg-success">bg-success</div>
-        <div class="bg-warning padding rounded" id="bg-warning">bg-warning</div>
-        <div class="bg-danger padding rounded" id="bg-danger">bg-danger</div>
-        <div class="bg-info padding rounded" id="bg-info">bg-info</div>
-        <div class="bg-primary-soft padding rounded" id="bg-primary-soft">bg-primary-soft</div>
-        <div class="bg-success-soft padding rounded" id="bg-success-soft">bg-success-soft</div>
-        <div class="bg-warning-soft padding rounded" id="bg-warning-soft">bg-warning-soft</div>
-        <div class="bg-danger-soft padding rounded" id="bg-danger-soft">bg-danger-soft</div>
-        <div class="bg-info-soft padding rounded" id="bg-info-soft">bg-info-soft</div>
+        <div class="bg-primary padding rounded" id="bg-primary">bg-primary <a href="#">link</a></div>
+        <div class="bg-success padding rounded" id="bg-success">bg-success <a href="#">link</a></div>
+        <div class="bg-warning padding rounded" id="bg-warning">bg-warning <a href="#">link</a></div>
+        <div class="bg-danger padding rounded" id="bg-danger">bg-danger <a href="#">link</a></div>
+        <div class="bg-info padding rounded" id="bg-info">bg-info <a href="#">link</a></div>
+        <div class="bg-primary-soft padding rounded" id="bg-primary-soft">bg-primary-soft <a href="#">link</a></div>
+        <div class="bg-success-soft padding rounded" id="bg-success-soft">bg-success-soft <a href="#">link</a></div>
+        <div class="bg-warning-soft padding rounded" id="bg-warning-soft">bg-warning-soft <a href="#">link</a></div>
+        <div class="bg-danger-soft padding rounded" id="bg-danger-soft">bg-danger-soft <a href="#">link</a></div>
+        <div class="bg-info-soft padding rounded" id="bg-info-soft">bg-info-soft <a href="#">link</a></div>
         <div class="bg-surface border padding rounded" id="surface">bg-surface</div>
         <div class="bg-subtle padding rounded" id="subtle">bg-subtle</div>
       </div>

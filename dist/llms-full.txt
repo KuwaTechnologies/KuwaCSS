@@ -48,8 +48,9 @@ color-{role}  bg-{role}  bg-{role}-soft  border-{role}  color-text  color-muted 
 bg-subtle  bg-transparent  opacity-0  opacity-25  opacity-50  opacity-75  opacity-100
 
 ## Box and size
-border  border-top  border-bottom  border-left  border-right  border-0  rounded  rounded-0
-rounded-s  rounded-l  rounded-xl  rounded-full  shadow  shadow-0  shadow-s  shadow-l  shadow-xl
+border  border-top  border-bottom  border-left  border-right  border-0  rounded  rounded-m
+rounded-0  rounded-s  rounded-l  rounded-xl  rounded-full  shadow  shadow-m  shadow-0  shadow-s
+shadow-l  shadow-xl
 width-full  width-auto  width-fit  width-screen  height-full  height-auto  height-screen
 min-height-screen  min-width-0  max-width-s  max-width-m  max-width-l  max-width-xl  max-width-prose
 max-width-full  max-width-none
@@ -211,7 +212,7 @@ Each pattern is a full page. Copy it, keep the link tag, change the content.
     <section class="bg-primary padding-y-2xl">
       <div class="container stack gap-m text-center">
         <h2 class="text-3xl">Ready when you are</h2>
-        <p class="text-l opacity-75">Free for individuals. Simple pricing for teams.</p>
+        <p class="text-l">Free for individuals. Simple pricing for teams.</p>
         <a href="/signup" class="button large margin-x-auto">Create an account</a>
       </div>
     </section>

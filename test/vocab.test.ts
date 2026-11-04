@@ -58,3 +58,7 @@ test('total distinct names between 300 and 400', () => {
 test('every entry has a description', () => {
   for (const e of list) assert.ok(e.description.length > 3, `${e.name} lacks description`);
 });
+
+test('bare-name rule: the bare name and its -m form both exist', () => {
+  for (const p of ['padding', 'margin', 'gap', 'rounded', 'shadow']) { has(p); has(`${p}-m`); }
+});

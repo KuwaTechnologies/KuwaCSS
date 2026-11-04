@@ -58,3 +58,13 @@ test('flow margins are zeroed inside a stack and kept outside', async () => {
   assert.equal(await computed(page, '#stack > p', 'margin-bottom'), '0px');
   assert.equal(await computed(page, '#flow-p', 'margin-bottom'), '16px');
 });
+
+test('prefixed primitives without a gap class get the default gap and own their children\'s margins', async () => {
+  const wide = await open({ file: 'kitchen-sink.html' }, { width: 1280 });
+  const narrow = await open({ file: 'kitchen-sink.html' }, { width: 375 });
+  assert.equal(await computed(wide, '#hm2', 'row-gap'), '16px');
+  assert.equal(await computed(wide, '#hm2 > p', 'margin-bottom'), '0px');
+  assert.equal(await computed(wide, '#mc', 'column-gap'), '16px');
+  assert.equal(await computed(wide, '#mc > p', 'margin-bottom'), '0px');
+  assert.equal(await computed(narrow, '#mc > p', 'margin-bottom'), '16px', 'below the breakpoint it is plain flow');
+});
