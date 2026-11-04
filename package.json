@@ -1,0 +1,68 @@
+{
+  "name": "kuwacss",
+  "version": "0.1.0",
+  "description": "A 150-word UI vocabulary that humans and AI both speak fluently. One file. No build. No JavaScript.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Kuwa Technologies",
+  "homepage": "https://github.com/KuwaTechnologies/kuwacss#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuwaTechnologies/kuwacss.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KuwaTechnologies/kuwacss/issues"
+  },
+  "keywords": [
+    "css",
+    "css-framework",
+    "classless",
+    "utility-classes",
+    "layout",
+    "design-tokens",
+    "dark-mode",
+    "ai",
+    "llm",
+    "llms-txt",
+    "no-build"
+  ],
+  "bin": {
+    "kuwacss": "cli/index.js"
+  },
+  "files": [
+    "dist",
+    "cli",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "main": "./dist/kuwa.css",
+  "style": "./dist/kuwa.css",
+  "types": "./dist/kuwa.d.ts",
+  "exports": {
+    ".": "./dist/kuwa.css",
+    "./min": "./dist/kuwa.min.css",
+    "./scoped": "./dist/kuwa-scoped.css",
+    "./vocab": "./dist/vocab.json",
+    "./llms.txt": "./dist/llms.txt",
+    "./types": {
+      "types": "./dist/kuwa.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node src/build/bundle.ts",
+    "test": "node --test test/*.test.ts",
+    "test:browser": "node --test test/browser/*.test.ts",
+    "check": "node cli/index.js check",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "gpt-tokenizer": "^4.1.0",
+    "lightningcss": "^1.33.0"
+  }
+}
