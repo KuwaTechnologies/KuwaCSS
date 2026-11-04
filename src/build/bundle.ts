@@ -1,9 +1,9 @@
 /** Assembles src/*.css and the generated CSS into dist/, in cascade layers, and writes the AI-contract files. */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { transform } from 'lightningcss';
 import { entries } from '../vocab.ts';
-import { utilitiesCss, primitivesCss, vocabJson, dts } from './generate.ts';
+import { utilitiesCss, primitivesCss, vocabJson, dts, llmsTxt, llmsFullTxt } from './generate.ts';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 export const LAYERS = '@layer kuwa.tokens, kuwa.reset, kuwa.base, kuwa.layout, kuwa.components, kuwa.utilities;';
@@ -60,6 +60,15 @@ export async function build(): Promise<void> {
   writeFileSync(dist + 'vocab.json', JSON.stringify(vocabJson(list, pkg.version), null, 2) + '\n');
   writeFileSync(dist + 'kuwa.d.ts', dts(list));
   writeFileSync(dist + 'cx.js', CX_JS);
+
+  const major = parseInt(pkg.version, 10);
+  const llms = llmsTxt(list, major, readFileSync(ROOT + 'src/llms.template.md', 'utf8'));
+  writeFileSync(dist + 'llms.txt', llms);
+  const patterns = [
+    ...readdirSync(ROOT + 'cookbook/').filter((f) => f.endsWith('.html')).sort().map((f) => ({ name: f, html: readFileSync(ROOT + 'cookbook/' + f, 'utf8') })),
+    { name: 'pricing.html', html: readFileSync(ROOT + 'examples/pricing.html', 'utf8') },
+  ];
+  writeFileSync(dist + 'llms-full.txt', llmsFullTxt(llms, patterns, `https://cdn.jsdelivr.net/npm/kuwacss@${major}/dist/kuwa.min.css`));
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

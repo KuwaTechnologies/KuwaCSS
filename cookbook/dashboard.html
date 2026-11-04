@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../dist/kuwa.css">
+</head>
+<body>
+  <div class="sidebar gap-0 min-height-screen" style="--side: 15rem">
+    <nav class="stack gap-xs padding-m bg-subtle" aria-label="Main">
+      <a href="/" class="bold text-l padding-y-s">Acme</a>
+      <a href="/dashboard" class="bold">Overview</a>
+      <a href="/reports">Reports</a>
+      <a href="/customers">Customers</a>
+      <a href="/settings">Settings</a>
+      <a href="/logout" class="margin-top-auto color-muted">Log out</a>
+    </nav>
+
+    <main class="stack gap-l padding-l">
+      <header class="row justify-between">
+        <div class="stack gap-xs"><h1 class="text-2xl">Overview</h1><p class="color-muted">Last 30 days</p></div>
+        <div class="row gap-s"><button type="button">Export</button><button type="button" class="primary">New report</button></div>
+      </header>
+
+      <div class="alert info" role="status">Billing for October has been finalised.</div>
+
+      <section class="grid gap-m" style="--min: 12rem" aria-label="Key metrics">
+        <article class="card stack gap-xs"><span class="text-s color-muted">Revenue</span><span class="text-3xl bold tabular">$48.2k</span><span class="badge success">+12%</span></article>
+        <article class="card stack gap-xs"><span class="text-s color-muted">Active users</span><span class="text-3xl bold tabular">8,431</span><span class="badge success">+4%</span></article>
+        <article class="card stack gap-xs"><span class="text-s color-muted">Churn</span><span class="text-3xl bold tabular">1.8%</span><span class="badge warning">+0.3</span></article>
+        <article class="card stack gap-xs"><span class="text-s color-muted">Open tickets</span><span class="text-3xl bold tabular">27</span><span class="badge danger">+9</span></article>
+      </section>
+
+      <section class="card stack gap-m">
+        <div class="row justify-between"><h2 class="text-xl">Recent orders</h2><a href="/orders" class="text-s">View all</a></div>
+        <div class="overflow-x-auto">
+          <table>
+            <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th class="text-right">Total</th></tr></thead>
+            <tbody>
+              <tr><td class="font-mono">#10492</td><td>Maria Alvarez</td><td><span class="badge success">Paid</span></td><td class="text-right tabular">$1,240.00</td></tr>
+              <tr><td class="font-mono">#10491</td><td>Ken Watanabe</td><td><span class="badge warning">Pending</span></td><td class="text-right tabular">$310.50</td></tr>
+              <tr><td class="font-mono">#10490</td><td>Priya Nair</td><td><span class="badge danger">Refunded</span></td><td class="text-right tabular">$89.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

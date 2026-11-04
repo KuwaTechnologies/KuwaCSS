@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acme — Ship faster</title>
+  <link rel="stylesheet" href="../dist/kuwa.css">
+</head>
+<body>
+  <header class="container row justify-between padding-y-m">
+    <a href="/" class="bold text-l">Acme</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/login">Log in</a>
+      <a href="/signup" class="button primary">Start free</a>
+    </nav>
+  </header>
+
+  <main class="stack gap-3xl">
+    <section class="container stack gap-l padding-y-3xl text-center">
+      <span class="badge primary margin-x-auto">Now in public beta</span>
+      <h1 class="text-4xl balance">Ship faster with less.</h1>
+      <p class="text-l color-muted max-width-prose margin-x-auto pretty">One stylesheet, no build step, and a vocabulary your whole team and your AI tools already understand.</p>
+      <div class="row justify-center gap-s">
+        <a href="/signup" class="button primary large">Get started</a>
+        <a href="/docs" class="button ghost large">Read the docs</a>
+      </div>
+    </section>
+
+    <section id="features" class="container stack gap-l">
+      <h2 class="text-center">Why teams switch</h2>
+      <div class="grid gap-l" style="--min: 18rem">
+        <article class="card stack gap-s"><h3>Zero build</h3><p class="color-muted">One link tag. Works in a static file, a CMS, or any framework.</p></article>
+        <article class="card stack gap-s"><h3>Looks finished</h3><p class="color-muted">Plain semantic HTML is styled, accessible, and dark-mode ready.</p></article>
+        <article class="card stack gap-s"><h3>AI friendly</h3><p class="color-muted">A 150-word vocabulary with a validator that checks generated markup.</p></article>
+      </div>
+    </section>
+
+    <section class="container switcher gap-xl align-center">
+      <div class="frame rounded-l" style="--ratio: 4/3"><img src="https://picsum.photos/seed/kuwa/800/600" alt="Product screenshot"></div>
+      <div class="stack gap-m">
+        <h2>Layouts that just work</h2>
+        <p class="color-muted">Name the layout you want: a stack, a row, a grid, a sidebar. Each one adapts to the space it has, so most pages never need a breakpoint.</p>
+        <a href="/docs/layout" class="button width-fit">See the primitives</a>
+      </div>
+    </section>
+
+    <section class="bg-primary padding-y-2xl">
+      <div class="container stack gap-m text-center">
+        <h2 class="text-3xl">Ready when you are</h2>
+        <p class="text-l opacity-75">Free for individuals. Simple pricing for teams.</p>
+        <a href="/signup" class="button large margin-x-auto">Create an account</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container padding-y-l text-s color-muted border-top">
+    <div class="row justify-between">
+      <span>© 2026 Acme</span>
+      <nav><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/status">Status</a></nav>
+    </div>
+  </footer>
+</body>
+</html>

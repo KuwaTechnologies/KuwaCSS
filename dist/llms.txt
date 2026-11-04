@@ -1,0 +1,100 @@
+# KuwaCSS v0 — complete reference
+Include once: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kuwacss@0/dist/kuwa.min.css">
+No build step. No JavaScript. Plain semantic HTML already looks finished; add classes only to change layout or emphasis.
+
+## Rules
+1. A class is property-value. Values come from ONE scale: 0 xs s m l xl 2xl 3xl (text sizes also have 4xl).
+2. A bare property means its medium value: padding = padding-m, gap = gap-m, margin = margin-m, rounded = rounded-m, shadow = shadow-m, border = 1px border.
+3. Only the classes in this file exist. Never invent classes. These do NOT exist: p-4 mt-2 w-full flex items-center text-gray-500 hover:* dark:* btn container-fluid.
+4. Responsive prefixes m: (>=768px) l: (>=1024px) xl: (>=1280px), mobile-first, ONLY on: hidden block stack row cols-1 cols-2 cols-3 cols-4 text-left text-center text-right order-first order-last grow.
+5. Colours are roles: primary success warning danger info. Dark mode is automatic; force it with data-theme="dark" or "light" on any element.
+6. Need something not listed? Write one line of CSS. Your CSS always beats KuwaCSS (cascade layers); never use !important.
+7. Tune a primitive with an inline custom property: style="--gap: 2rem" or style="--min: 20rem".
+
+## Layout (one per container)
+stack          vertical flex column, children separated by gap (--gap, default m)
+row            horizontal flex row, wraps, children vertically centred (--gap)
+grid           responsive columns, as many as fit; --min sets minimum column width (default 16rem)
+cols-1 cols-2 cols-3 cols-4 fixed column count (1 to 4); combine with m:/l:/xl:
+container      centred content column, max 72rem, side padding
+center         centres children horizontally and vertically
+sidebar        first child is a fixed sidebar (--side, default 16rem), second child fills; stacks when narrow
+sidebar-right  same as sidebar, the sidebar is the last child
+cover          full viewport height; first child at top, last at bottom, middle centred; a single child is centred
+switcher       row that becomes a stack below --threshold (default 30rem)
+frame          fixed aspect ratio box (--ratio, default 16/9); img or video inside covers it
+reel           horizontal scroll strip with snap
+Children:  grow  shrink-0  span-2  span-3  span-full  order-first  order-last  self-start  self-center
+self-end  self-stretch
+Alignment: align-start  align-center  align-end  align-stretch  align-baseline  justify-start  justify-center
+justify-end  justify-between  justify-around  justify-evenly  wrap  nowrap
+
+## Spacing (sizes: 0 xs s m l xl 2xl 3xl; left/right follow writing direction)
+padding-{size}  padding-x-{size}  padding-y-{size}  padding-top-{size}  padding-bottom-{size}
+padding-left-{size}  padding-right-{size}  padding
+margin-{size}  margin-auto  margin-x-{size}  margin-x-auto  margin-y-{size}  margin-y-auto
+margin-top-{size}  margin-top-auto  margin-bottom-{size}  margin-bottom-auto  margin-left-{size}
+margin-left-auto  margin-right-{size}  margin-right-auto  margin
+gap-{size}  gap-x-{size}  gap-y-{size}  gap
+
+## Text (text-* is size only, never colour)
+text-xs  text-s  text-m  text-l  text-xl  text-2xl  text-3xl  text-4xl  text-left  text-center
+text-right  font-sans  font-serif  font-mono  light  regular  medium  semibold  bold  italic
+uppercase  lowercase  capitalize  underline  strike  tabular  truncate  lines-2  lines-3  balance
+pretty  leading-tight  leading-normal  leading-loose  tracking-tight  tracking-normal  tracking-wide
+
+## Colour (roles: primary success warning danger info; bg-{role} also sets a readable text colour; -soft is a light tint)
+color-{role}  bg-{role}  bg-{role}-soft  border-{role}  color-text  color-muted  bg-page  bg-surface
+bg-subtle  bg-transparent  opacity-0  opacity-25  opacity-50  opacity-75  opacity-100
+
+## Box and size
+border  border-top  border-bottom  border-left  border-right  border-0  rounded  rounded-0
+rounded-s  rounded-l  rounded-xl  rounded-full  shadow  shadow-0  shadow-s  shadow-l  shadow-xl
+width-full  width-auto  width-fit  width-screen  height-full  height-auto  height-screen
+min-height-screen  min-width-0  max-width-s  max-width-m  max-width-l  max-width-xl  max-width-prose
+max-width-full  max-width-none
+
+## Display, position, interaction
+hidden  block  inline  inline-block  visually-hidden  overflow-hidden  overflow-auto
+overflow-visible  overflow-x-auto  overflow-y-auto  relative  absolute  fixed  sticky  static
+inset-0  top-0  right-0  bottom-0  left-0  z-below  z-above  z-top  pointer  transition  select-none
+
+## Components (these elements need no classes: button input select textarea label fieldset table dialog details nav blockquote code pre kbd mark hr progress figure img)
+button         button look for <a> (a <button> needs no class)  (modifiers: primary ghost danger small large)
+card           surface panel with border, radius, padding
+badge          small label; add a role  (modifiers: primary danger success warning info)
+alert          message box; add a role  (modifiers: primary danger success warning info)
+prose          long-form text: measure, rhythm, headings, lists
+switch         toggle switch on input[type=checkbox]
+icon           1em icon in the current text colour on svg
+label          wrap an input: label text sits above it; wrap a checkbox or radio: inline row
+
+## Theme (override on :root)
+--primary --success --warning --danger --info          any colour; oklch recommended
+--text --muted --border --bg-page --bg-surface --bg-subtle   use light-dark(light, dark)
+--font --font-serif --font-mono --radius --container --measure
+
+## Examples
+<header class="container row justify-between padding-y-m">
+  <a href="/" class="bold text-l">Acme</a>
+  <nav><a href="/docs">Docs</a><a href="/signup" class="button primary">Sign up</a></nav>
+</header>
+
+<section class="container stack gap-l padding-y-3xl text-center">
+  <h1 class="text-4xl balance">Ship faster with less.</h1>
+  <p class="text-l color-muted max-width-prose margin-x-auto">One stylesheet. No build. Looks right in light and dark.</p>
+  <div class="row justify-center"><a href="/start" class="button primary large">Get started</a><a href="/docs" class="button ghost large">Read the docs</a></div>
+</section>
+
+<div class="grid gap-m" style="--min: 18rem">
+  <article class="card stack gap-s"><span class="badge primary">New</span><h3>Fast</h3><p class="color-muted">Under 10 KB.</p></article>
+  <article class="card stack gap-s"><h3>Simple</h3><p class="color-muted">150 words to learn.</p></article>
+</div>
+
+<div class="sidebar gap-l min-height-screen">
+  <nav class="stack gap-xs padding-m bg-subtle"><a href="#">Overview</a><a href="#">Reports</a></nav>
+  <main class="stack gap-l padding-l">
+    <div class="row justify-between"><h2>Reports</h2><button class="primary">Export</button></div>
+    <div class="alert success" role="status">Export finished.</div>
+  </main>
+</div>

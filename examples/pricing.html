@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing</title>
+  <link rel="stylesheet" href="../dist/kuwa.css">
+  <style>:root { --primary: oklch(55% 0.2 262); --radius: 0.75rem }</style>
+</head>
+<body>
+  <header class="container row justify-between padding-y-m">
+    <a href="/" class="bold text-l">Acme</a>
+    <nav>
+      <a href="/docs">Docs</a>
+      <a href="/pricing" class="bold">Pricing</a>
+      <a href="/login" class="button">Log in</a>
+    </nav>
+  </header>
+
+  <main class="container stack gap-2xl padding-y-2xl">
+    <section class="stack gap-s text-center max-width-prose margin-x-auto">
+      <h1 class="text-4xl balance">Simple pricing</h1>
+      <p class="text-l color-muted">Start free. Upgrade when the team grows.</p>
+    </section>
+
+    <section class="grid gap-l" style="--min: 18rem">
+      <article class="card stack gap-m">
+        <h3>Free</h3>
+        <p class="text-3xl bold tabular">$0</p>
+        <ul class="stack gap-xs color-muted"><li>1 project</li><li>Community support</li></ul>
+        <a href="/signup" class="button margin-top-auto">Start free</a>
+      </article>
+
+      <article class="card stack gap-m border-primary shadow-l">
+        <div class="row justify-between"><h3>Team</h3><span class="badge primary">Popular</span></div>
+        <p class="text-3xl bold tabular">$12 <span class="text-s color-muted regular">per seat</span></p>
+        <ul class="stack gap-xs color-muted"><li>Unlimited projects</li><li>Priority support</li><li>SSO</li></ul>
+        <a href="/signup?plan=team" class="button primary margin-top-auto">Choose Team</a>
+      </article>
+
+      <article class="card stack gap-m">
+        <h3>Enterprise</h3>
+        <p class="text-3xl bold tabular">Custom</p>
+        <ul class="stack gap-xs color-muted"><li>Dedicated support</li><li>Custom contracts</li></ul>
+        <a href="/contact" class="button ghost margin-top-auto">Contact sales</a>
+      </article>
+    </section>
+
+    <section class="switcher gap-l align-start">
+      <div class="stack gap-s"><h2>Questions?</h2><p class="color-muted">Everything you need to know.</p></div>
+      <div class="stack gap-s">
+        <details><summary>Can I cancel any time?</summary><p>Yes. Cancel from settings; access continues to the end of the period.</p></details>
+        <details><summary>Do you offer discounts?</summary><p>Yes, for education and non-profits.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container padding-y-l text-s color-muted border-top">
+    <div class="row justify-between"><span>© Acme</span><nav><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div>
+  </footer>
+</body>
+</html>

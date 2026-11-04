@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account settings</title>
+  <link rel="stylesheet" href="../dist/kuwa.css">
+</head>
+<body>
+  <header class="container row justify-between padding-y-m">
+    <a href="/" class="bold text-l">Acme</a>
+    <nav><a href="/dashboard">Dashboard</a><a href="/settings" class="bold">Settings</a></nav>
+  </header>
+
+  <main class="container max-width-m stack gap-l padding-y-l">
+    <div class="stack gap-xs"><h1 class="text-2xl">Account settings</h1><p class="color-muted">Changes save when you press Save.</p></div>
+
+    <form class="stack gap-l" action="/settings" method="post">
+      <section class="card stack gap-m">
+        <h2 class="text-xl">Profile</h2>
+        <div class="cols-1 m:cols-2 gap-m">
+          <label>First name <input type="text" name="first" value="Maria" autocomplete="given-name"></label>
+          <label>Last name <input type="text" name="last" value="Alvarez" autocomplete="family-name"></label>
+        </div>
+        <label>Email <input type="email" name="email" value="maria@example.com" autocomplete="email"></label>
+        <label>Bio <textarea name="bio" placeholder="A sentence or two about you"></textarea></label>
+        <label>Time zone
+          <select name="tz"><option>UTC</option><option selected>Europe/Madrid</option><option>America/New_York</option></select>
+        </label>
+      </section>
+
+      <section class="card stack gap-m">
+        <h2 class="text-xl">Notifications</h2>
+        <label><input type="checkbox" class="switch" name="n-product" checked> Product updates</label>
+        <label><input type="checkbox" class="switch" name="n-billing" checked> Billing alerts</label>
+        <label><input type="checkbox" class="switch" name="n-digest"> Weekly digest</label>
+        <fieldset>
+          <legend>Delivery</legend>
+          <label><input type="radio" name="delivery" value="email" checked> Email</label>
+          <label><input type="radio" name="delivery" value="sms"> SMS</label>
+        </fieldset>
+      </section>
+
+      <section class="card stack gap-m border-danger">
+        <h2 class="text-xl color-danger">Danger zone</h2>
+        <p class="color-muted">Deleting your account removes all data after 30 days.</p>
+        <button type="button" class="danger width-fit">Delete account</button>
+      </section>
+
+      <div class="row justify-end gap-s">
+        <a href="/dashboard" class="button ghost">Cancel</a>
+        <button type="submit" class="primary">Save changes</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

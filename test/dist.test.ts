@@ -7,6 +7,9 @@ import { escapeSelector } from '../src/build/generate.ts';
 
 const LAYERS = '@layer kuwa.tokens, kuwa.reset, kuwa.base, kuwa.layout, kuwa.components, kuwa.utilities;';
 const read = (f: string) => readFileSync(new URL(`../dist/${f}`, import.meta.url), 'utf8');
+const TEXT_FILES = ['kuwa.css', 'kuwa.min.css', 'kuwa-scoped.css', 'vocab.json', 'kuwa.d.ts', 'cx.js', 'llms.txt', 'llms-full.txt'];
+const before: Record<string, string> = {};
+for (const f of TEXT_FILES) { try { before[f] = read(f); } catch { before[f] = ''; } }
 
 await build();
 const css = read('kuwa.css');
@@ -27,7 +30,7 @@ function blockOf(source: string, prelude: RegExp): string {
 }
 
 test('build produces every dist file', () => {
-  for (const f of ['kuwa.css', 'kuwa.min.css', 'kuwa-scoped.css', 'vocab.json', 'kuwa.d.ts', 'cx.js']) {
+  for (const f of TEXT_FILES) {
     assert.ok(existsSync(new URL(`../dist/${f}`, import.meta.url)), `missing dist/${f}`);
   }
 });
@@ -67,4 +70,8 @@ test('no !important except inside prefers-reduced-motion', () => {
 test('every component and modifier class exists as a selector', () => {
   const names = vocab.classes.filter((c: any) => c.kind === 'component' || c.kind === 'modifier').map((c: any) => c.name);
   for (const name of names) assert.ok(css.includes(`.${name}`), `selector missing for ${name}`);
+});
+
+test('dist is committed up to date (no drift)', () => {
+  for (const f of TEXT_FILES) assert.equal(read(f), before[f], `dist/${f} differs from the committed build: run npm run build and commit`);
 });

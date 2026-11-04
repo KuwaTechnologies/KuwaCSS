@@ -1,5 +1,5 @@
 /** Generates every derived artefact from src/vocab.ts. */
-import { PREFIXES, RESPONSIVE, TRANSLATIONS, SPACE, TEXT, type Entry } from '../vocab.ts';
+import { PREFIXES, RESPONSIVE, TRANSLATIONS, SPACE, TEXT, ROLES, type Entry } from '../vocab.ts';
 
 const responsiveSet = new Set<string>(RESPONSIVE);
 
@@ -76,4 +76,80 @@ export function dts(list: Entry[]): string {
     'export function cx(...classes: Array<KuwaClass | false | null | undefined>): string;',
     '',
   ].join('\n');
+}
+
+function wrapWords(words: string[], width = 100): string {
+  const lines: string[] = [];
+  let line = '';
+  for (const w of words) {
+    if (line && line.length + w.length + 2 > width) { lines.push(line); line = ''; }
+    line = line ? `${line}  ${w}` : w;
+  }
+  if (line) lines.push(line);
+  return lines.join('\n');
+}
+
+/** Collapses `stem-<value>` names into `stem-{size}` / `stem-{role}`, preserving order. */
+function collapse(names: string[], values: readonly string[], token: string): string[] {
+  const out: string[] = [];
+  for (const n of names) {
+    let s = n;
+    for (const v of values) {
+      if (n === v) { s = `{${token}}`; break; }
+      if (n.endsWith(`-${v}`)) { s = `${n.slice(0, -v.length)}{${token}}`; break; }
+      if (n.includes(`-${v}-`)) { s = n.replace(`-${v}-`, `-{${token}}-`); break; }
+    }
+    if (!out.includes(s)) out.push(s);
+  }
+  return out;
+}
+
+const describe = (es: Entry[]) => es.map((e) => `${e.name.padEnd(14)} ${e.description}`).join('\n');
+
+export function llmsTxt(list: Entry[], major: number, template: string): string {
+  const by = (...groups: string[]) => list.filter((e) => groups.includes(e.group) && e.kind !== 'component' && e.kind !== 'modifier');
+  const names = (es: Entry[]) => es.map((e) => e.name);
+
+  const layout: string[] = [];
+  for (const e of list.filter((x) => x.kind === 'primitive')) {
+    if (/^cols-\d$/.test(e.name)) {
+      if (!layout.some((l) => l.startsWith('cols-1'))) layout.push(`${'cols-1 cols-2 cols-3 cols-4'.padEnd(14)} fixed column count (1 to 4); combine with m:/l:/xl:`);
+      continue;
+    }
+    layout.push(`${e.name.padEnd(14)} ${e.description}`);
+  }
+
+  const spacingStems = collapse(names(by('spacing')), SPACE, 'size');
+  const spacing = ['padding', 'margin', 'gap'].map((p) => wrapWords(spacingStems.filter((s) => s === p || s.startsWith(`${p}-`)))).join('\n');
+
+  const components = list.filter((e) => e.kind === 'component').map((e) => {
+    const mods = list.filter((m) => m.kind === 'modifier' && m.appliesTo?.some((a) => a === e.name || a === `.${e.name}`)).map((m) => m.name);
+    return `${e.name.padEnd(14)} ${e.description}${mods.length ? `  (modifiers: ${mods.join(' ')})` : ''}`;
+  }).join('\n');
+
+  const map: Record<string, string> = {
+    major: String(major),
+    cdn: `https://cdn.jsdelivr.net/npm/kuwacss@${major}/dist/kuwa.min.css`,
+    prefixes: Object.entries(PREFIXES).map(([p, rem]) => `${p}: (>=${parseFloat(rem) * 16}px)`).join(' '),
+    responsive: RESPONSIVE.join(' '),
+    layout: layout.join('\n'),
+    children: wrapWords(names(by('children'))),
+    alignment: wrapWords(names(by('alignment'))),
+    spacing,
+    typography: wrapWords(names(by('typography'))),
+    color: wrapWords(collapse(names(by('color')), ROLES, 'role')),
+    box: wrapWords(names(by('box'))),
+    sizing: wrapWords(names(by('sizing'))),
+    display: wrapWords(names(by('display', 'position', 'interaction'))),
+    components,
+  };
+  return template.replace(/\{\{(\w+)\}\}/g, (_, k: string) => {
+    if (!(k in map)) throw new Error(`llms.template.md: unknown placeholder {{${k}}}`);
+    return map[k];
+  });
+}
+
+export function llmsFullTxt(llms: string, patterns: Array<{ name: string; html: string }>, cdn: string): string {
+  const body = patterns.map((p) => `\n## Pattern: ${p.name}\n\`\`\`html\n${p.html.replace('../dist/kuwa.css', cdn).trimEnd()}\n\`\`\`\n`).join('');
+  return `${llms}\n\n# Cookbook: complete pages\nEach pattern is a full page. Copy it, keep the link tag, change the content.\n${body}`;
 }
