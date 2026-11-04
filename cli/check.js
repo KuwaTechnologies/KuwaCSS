@@ -1,5 +1,5 @@
 /** `kuwacss check`: validates class names in source files and reports what to change. */
-import { readFileSync, writeFileSync, statSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, lstatSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { extractClasses, CLASS_ATTR } from './extract.js';
 import { analyze } from './analyze.js';
@@ -8,7 +8,7 @@ export function loadVocab() {
   return JSON.parse(readFileSync(new URL('../dist/vocab.json', import.meta.url), 'utf8'));
 }
 
-/** Returns the file as text, or null when it is binary or not valid UTF-8. */
+/** Returns the file as text, or null when it is binary or not valid UTF-8. Throws for unreadable paths. */
 function readText(file) {
   const buf = readFileSync(file);
   if (buf.includes(0)) return null;
@@ -17,23 +17,33 @@ function readText(file) {
 
 const EXTENSIONS = new Set(['.html', '.htm', '.jsx', '.tsx', '.js', '.ts', '.vue', '.svelte', '.astro', '.md', '.mdx']);
 
-/** Expands directories into their markup and component files, skipping node_modules and dot folders. */
+/**
+ * Expands directories into their markup and component files, skipping node_modules, dot folders and symlinks.
+ * Returns { files, errors }; a missing path is an error, never a crash.
+ */
 export function expandPaths(paths) {
-  const out = [];
+  const files = [], errors = [];
   const walk = (p) => {
-    if (statSync(p).isDirectory()) {
+    const st = lstatSync(p);
+    if (st.isSymbolicLink()) return;
+    if (st.isDirectory()) {
       for (const name of readdirSync(p).sort()) {
         if (name === 'node_modules' || name.startsWith('.')) continue;
         walk(join(p, name));
       }
-    } else if ([...EXTENSIONS].some((e) => p.endsWith(e)) || !out.length && paths.includes(p)) {
-      out.push(p);
+    } else if ([...EXTENSIONS].some((e) => p.endsWith(e))) {
+      files.push(p);
     }
   };
   for (const p of paths) {
-    if (statSync(p).isDirectory()) walk(p); else out.push(p);
+    try {
+      const st = lstatSync(p);
+      if (st.isDirectory()) walk(p); else files.push(p);
+    } catch (e) {
+      errors.push(`${p}: ${e.code === 'ENOENT' ? 'no such file or directory' : e.message}`);
+    }
   }
-  return out;
+  return { files, errors };
 }
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -53,7 +63,20 @@ export async function runCheck(argv, io) {
     return 2;
   }
   const vocab = loadVocab();
-  const sources = useStdin ? [{ file: '<stdin>', text: await io.stdin() }] : expandPaths(files).map((f) => ({ file: f, text: readText(f) }));
+  let sources;
+  if (useStdin) {
+    sources = [{ file: '<stdin>', text: await io.stdin() }];
+  } else {
+    const { files: found, errors } = expandPaths(files);
+    sources = [];
+    for (const f of found) {
+      try { sources.push({ file: f, text: readText(f) }); } catch (e) { errors.push(`${f}: ${e.message}`); }
+    }
+    if (errors.length) {
+      for (const e of errors) io.stderr(`kuwacss check: ${e}\n`);
+      return 2;
+    }
+  }
   const all = [];
   let fixed = 0;
   for (const { file, text } of sources) {

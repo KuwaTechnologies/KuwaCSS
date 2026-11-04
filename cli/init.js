@@ -1,5 +1,5 @@
 /** `kuwacss init`: copies the context file into the project and points AI tools and HTML at KuwaCSS. */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const SENTENCE = 'This project uses KuwaCSS. Read `kuwa.llms.txt` before writing markup, then run `npx kuwacss check` on your output.';
@@ -11,6 +11,11 @@ export async function runInit(argv, io, cwd) {
   const linkIndex = argv.indexOf('--link');
   const linkFile = linkIndex >= 0 ? argv[linkIndex + 1] : null;
   const notes = [];
+
+  if (linkIndex >= 0) {
+    if (!linkFile || linkFile.startsWith('--')) { io.stderr('kuwacss init: --link needs a file name, e.g. --link index.html\n'); return 2; }
+    try { statSync(join(cwd, linkFile)); } catch { io.stderr(`kuwacss init: ${linkFile}: no such file\n`); return 2; }
+  }
 
   const target = join(cwd, 'kuwa.llms.txt');
   if (!existsSync(target) || flags.has('--force')) {

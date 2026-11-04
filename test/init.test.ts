@@ -59,3 +59,16 @@ test('--link inserts the stylesheet link once before </head>', async () => {
   assert.equal((html.match(/kuwacss@0\/dist\/kuwa\.min\.css/g) ?? []).length, 1);
   assert.ok(html.indexOf('<link') < html.indexOf('</head>'));
 });
+
+test('--link with a missing file exits 2 before writing anything', async () => {
+  const dir = tmp();
+  const r = await run(['--link', 'nope.html'], dir);
+  assert.equal(r.code, 2);
+  assert.match(r.err, /nope\.html/);
+  assert.ok(!existsSync(join(dir, 'kuwa.llms.txt')));
+});
+
+test('--link without a file name exits 2', async () => {
+  const r = await run(['--link', '--force'], tmp());
+  assert.equal(r.code, 2);
+});

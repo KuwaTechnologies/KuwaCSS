@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, mkdtempSync, copyFileSync } from 'node:fs';
+import { readFileSync, mkdtempSync, copyFileSync, mkdirSync, writeFileSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -113,4 +113,43 @@ test('a directory argument is scanned recursively for markup and component files
   const files = new Set(JSON.parse(r.out).map((f: any) => f.file.split('/').pop()));
   assert.ok(files.has('bad.html'));
   assert.ok(!files.has('clean.html'));
+});
+
+test('common Tailwind spellings never pass silently and get a usable suggestion', async () => {
+  const r = await run(['--stdin', '--json'], '<div class="flex text-gray-500 p-3 mt-8 px-6 bg-blue-500 text-red-600 max-w-md space-y-4 w-1/2 h-10 border-gray-200">');
+  const got = new Map<string, any>(JSON.parse(r.out).map((f: any) => [f.cls, f]));
+  for (const c of ['flex', 'text-gray-500', 'p-3', 'mt-8', 'px-6', 'bg-blue-500', 'text-red-600', 'max-w-md', 'space-y-4', 'w-1/2', 'h-10', 'border-gray-200']) assert.ok(got.has(c), `${c} passed silently`);
+  assert.equal(got.get('flex').suggestion, 'row');
+  assert.equal(got.get('p-3').suggestion, 'padding-s');
+  assert.equal(got.get('mt-8').suggestion, 'margin-top-xl');
+  assert.equal(got.get('px-6').suggestion, 'padding-x-l');
+  assert.equal(got.get('text-gray-500').suggestion, 'color-muted');
+  assert.equal(got.get('bg-blue-500').suggestion, 'bg-primary');
+  assert.equal(got.get('text-red-600').suggestion, 'color-danger');
+  assert.equal(got.get('border-gray-200').suggestion, 'border');
+  assert.equal(got.get('max-w-md').suggestion, 'max-width-m');
+  assert.equal(got.get('space-y-4').suggestion, 'stack');
+});
+
+test('a known first stem with an invalid value is a near-miss that lists valid values', () => {
+  const [f] = findings('<div class="text-huge">');
+  assert.equal(f.kind, 'near-miss');
+  assert.match(f.message, /valid/);
+});
+
+test('a missing path exits 2 with a message, not a stack trace', async () => {
+  const r = await run(['definitely-missing.html']);
+  assert.equal(r.code, 2);
+  assert.match(r.err, /no such file/);
+  assert.equal(r.out, '');
+});
+
+test('a symlink cycle inside a scanned directory does not crash the scan', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'kuwa-loop-'));
+  mkdirSync(join(dir, 'sub'));
+  writeFileSync(join(dir, 'sub', 'a.html'), '<div class="row">');
+  symlinkSync(dir, join(dir, 'sub', 'loop'));
+  const r = await run([dir]);
+  assert.notEqual(r.code, 2, r.err);
+  assert.match(r.out, /0 findings in 1 file/);
 });
