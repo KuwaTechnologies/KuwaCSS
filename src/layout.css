@@ -1,0 +1,24 @@
+/* Child and descendant rules of the layout primitives. Container rules are generated from src/vocab.ts. */
+
+/* Inside a primitive the primitive owns spacing: flow margins are zeroed */
+:where(.stack, .row, .grid, .center, .cols-1, .cols-2, .cols-3, .cols-4, .sidebar, .sidebar-right, .switcher, .reel, .cover) > :where(*) { margin-block: 0; }
+
+/* sidebar: first child fixed, second fills; wraps below when the content would be narrower than half */
+.sidebar > :first-child { flex-basis: var(--side, 16rem); flex-grow: 1; }
+.sidebar > :last-child { flex-basis: 0; flex-grow: 999; min-inline-size: 50%; }
+.sidebar-right > :last-child { flex-basis: var(--side, 16rem); flex-grow: 1; }
+.sidebar-right > :first-child { flex-basis: 0; flex-grow: 999; min-inline-size: 50%; }
+
+/* switcher: children share a row above the threshold and stack below it */
+.switcher > * { flex-grow: 1; flex-basis: calc((var(--threshold, 30rem) - 100%) * 999); }
+
+/* cover: first child at the top, last at the bottom, the rest centred; a single child is centred */
+.cover > * { margin-block: auto; }
+.cover > :first-child:not(:only-child) { margin-block-start: 0; }
+.cover > :last-child:not(:only-child) { margin-block-end: 0; }
+
+/* frame: media covers the box */
+.frame > :is(img, video, iframe) { inline-size: 100%; block-size: 100%; object-fit: cover; }
+
+/* reel: children keep their size and snap */
+.reel > * { flex: 0 0 auto; scroll-snap-align: start; }

@@ -643,6 +643,60 @@
     display: flex;
     overflow-x: auto;
   }
+
+  :where(.stack, .row, .grid, .center, .cols-1, .cols-2, .cols-3, .cols-4, .sidebar, .sidebar-right, .switcher, .reel, .cover) > :where(*) {
+    margin-block: 0;
+  }
+
+  .sidebar > :first-child {
+    flex-basis: var(--side, 16rem);
+    flex-grow: 1;
+  }
+
+  .sidebar > :last-child {
+    flex-grow: 999;
+    flex-basis: 0;
+    min-inline-size: 50%;
+  }
+
+  .sidebar-right > :last-child {
+    flex-basis: var(--side, 16rem);
+    flex-grow: 1;
+  }
+
+  .sidebar-right > :first-child {
+    flex-grow: 999;
+    flex-basis: 0;
+    min-inline-size: 50%;
+  }
+
+  .switcher > * {
+    flex-grow: 1;
+    flex-basis: calc((var(--threshold, 30rem) - 100%) * 999);
+  }
+
+  .cover > * {
+    margin-block: auto;
+  }
+
+  .cover > :first-child:not(:only-child) {
+    margin-block-start: 0;
+  }
+
+  .cover > :last-child:not(:only-child) {
+    margin-block-end: 0;
+  }
+
+  .frame > :is(img, video, iframe) {
+    object-fit: cover;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .reel > * {
+    scroll-snap-align: start;
+    flex: none;
+  }
 }
 
 @layer kuwa.components;
