@@ -1,7 +1,7 @@
 # KuwaCSS
 
 [![npm](https://img.shields.io/npm/v/kuwacss)](https://www.npmjs.com/package/kuwacss)
-[![CI](https://github.com/KuwaTechnologies/kuwacss/actions/workflows/ci.yml/badge.svg)](https://github.com/KuwaTechnologies/kuwacss/actions/workflows/ci.yml)
+[![CI](https://github.com/KuwaTechnologies/KuwaCSS/actions/workflows/ci.yml/badge.svg)](https://github.com/KuwaTechnologies/KuwaCSS/actions/workflows/ci.yml)
 ![size](https://img.shields.io/badge/gzipped-%3C10%20KB-blue)
 ![no build](https://img.shields.io/badge/build%20step-none-success)
 

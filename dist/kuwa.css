@@ -1,4 +1,4 @@
-/*! KuwaCSS v0.1.0 | MIT | https://github.com/KuwaTechnologies/kuwacss */
+/*! KuwaCSS v0.1.0 | MIT | https://github.com/KuwaTechnologies/KuwaCSS */
 @layer kuwa.tokens, kuwa.reset, kuwa.base, kuwa.layout, kuwa.components, kuwa.utilities;
 @layer kuwa.tokens {
   :root {

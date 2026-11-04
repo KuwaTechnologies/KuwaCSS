@@ -28,7 +28,7 @@ export function assemble(opts: { scoped?: boolean } = {}): string {
   ].join('\n');
 }
 
-const BANNER = `/*! KuwaCSS v${pkg.version} | MIT | https://github.com/KuwaTechnologies/kuwacss */`;
+const BANNER = `/*! KuwaCSS v${pkg.version} | MIT | https://github.com/KuwaTechnologies/KuwaCSS */`;
 
 /** Lightning CSS drops a standalone layer-order statement, so it is re-added after transformation. */
 function css(code: string, minify: boolean, filename: string): string {

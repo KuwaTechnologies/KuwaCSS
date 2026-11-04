@@ -5,13 +5,13 @@
   "type": "module",
   "license": "MIT",
   "author": "Kuwa Technologies",
-  "homepage": "https://github.com/KuwaTechnologies/kuwacss#readme",
+  "homepage": "https://github.com/KuwaTechnologies/KuwaCSS#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KuwaTechnologies/kuwacss.git"
+    "url": "git+https://github.com/KuwaTechnologies/KuwaCSS.git"
   },
   "bugs": {
-    "url": "https://github.com/KuwaTechnologies/kuwacss/issues"
+    "url": "https://github.com/KuwaTechnologies/KuwaCSS/issues"
   },
   "keywords": [
     "css",
