@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: git diff --exit-code -- dist
+      - run: npm test
+      - name: Tag matches package.json version
+        run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+      - name: Use an npm that supports trusted publishing
+        run: npm install -g npm@latest && npm --version
+      - name: Publish with a token (used when the NPM_TOKEN secret is set, e.g. for the very first release)
+        if: env.NPM_TOKEN != ''
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          npm publish --provenance --access public
+      - name: Publish with trusted publishing (OIDC, no secret needed once configured on npmjs.com)
+        if: env.NPM_TOKEN == ''
+        run: npm publish --provenance --access public
