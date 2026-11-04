@@ -63,3 +63,8 @@ test('no !important except inside prefers-reduced-motion', () => {
   assert.ok(total > 0, 'reduced-motion rule should use !important');
   assert.equal(total, inside);
 });
+
+test('every component and modifier class exists as a selector', () => {
+  const names = vocab.classes.filter((c: any) => c.kind === 'component' || c.kind === 'modifier').map((c: any) => c.name);
+  for (const name of names) assert.ok(css.includes(`.${name}`), `selector missing for ${name}`);
+});

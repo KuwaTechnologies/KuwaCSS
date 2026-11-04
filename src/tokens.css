@@ -4,10 +4,10 @@
 
   /* Role colours (any colour space; oklch recommended) */
   --primary: oklch(55% 0.2 262);
-  --success: oklch(62% 0.17 150);
+  --success: oklch(52% 0.17 150);
   --warning: oklch(78% 0.16 80);
   --danger: oklch(58% 0.21 25);
-  --info: oklch(62% 0.14 230);
+  --info: oklch(52% 0.14 230);
 
   /* Neutrals: both modes in one declaration */
   --text: light-dark(oklch(20% 0.01 260), oklch(93% 0.01 260));
@@ -54,7 +54,8 @@
   --shadow-xl: 0 20px 48px rgb(0 0 0 / 0.2);
 
   /* Derived: computed from the tokens above, not meant for override */
-  --ring: var(--primary);
+  --link: light-dark(var(--primary), color-mix(in oklch, var(--primary) 60%, white));
+  --ring: var(--link);
   --on-primary: white;
   --on-success: white;
   --on-warning: oklch(22% 0.03 80);
@@ -65,11 +66,11 @@
   --warning-soft: color-mix(in oklch, var(--warning) 18%, var(--bg-surface));
   --danger-soft: color-mix(in oklch, var(--danger) 14%, var(--bg-surface));
   --info-soft: color-mix(in oklch, var(--info) 14%, var(--bg-surface));
-  --primary-text: color-mix(in oklch, var(--primary) 72%, var(--text));
-  --success-text: color-mix(in oklch, var(--success) 60%, var(--text));
-  --warning-text: color-mix(in oklch, var(--warning) 40%, var(--text));
-  --danger-text: color-mix(in oklch, var(--danger) 72%, var(--text));
-  --info-text: color-mix(in oklch, var(--info) 64%, var(--text));
+  --primary-text: light-dark(color-mix(in oklch, var(--primary) 85%, black), color-mix(in oklch, var(--primary) 60%, white));
+  --success-text: light-dark(color-mix(in oklch, var(--success) 80%, black), color-mix(in oklch, var(--success) 60%, white));
+  --warning-text: light-dark(color-mix(in oklch, var(--warning) 45%, black), color-mix(in oklch, var(--warning) 80%, white));
+  --danger-text: light-dark(color-mix(in oklch, var(--danger) 80%, black), color-mix(in oklch, var(--danger) 60%, white));
+  --info-text: light-dark(color-mix(in oklch, var(--info) 85%, black), color-mix(in oklch, var(--info) 60%, white));
   --primary-hover: color-mix(in oklch, var(--primary) 88%, black);
   --success-hover: color-mix(in oklch, var(--success) 88%, black);
   --warning-hover: color-mix(in oklch, var(--warning) 88%, black);

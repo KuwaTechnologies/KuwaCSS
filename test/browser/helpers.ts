@@ -59,3 +59,32 @@ export function contrast(a: [number, number, number], b: [number, number, number
   const [l1, l2] = [luminance(a), luminance(b)].sort((x, y) => y - x);
   return (l1 + 0.05) / (l2 + 0.05);
 }
+
+/** Own background colour with alpha, resolved to sRGB. */
+export async function rgba(page: Page, selector: string, prop: string): Promise<[number, number, number, number]> {
+  return page.$eval(selector, (el, p) => {
+    const value = getComputedStyle(el as Element).getPropertyValue(p as string);
+    const c = document.createElement('canvas'); c.width = c.height = 1;
+    const ctx = c.getContext('2d', { colorSpace: 'srgb' })!;
+    ctx.fillStyle = value; ctx.fillRect(0, 0, 1, 1);
+    const d = ctx.getImageData(0, 0, 1, 1).data;
+    return [d[0], d[1], d[2], d[3]] as [number, number, number, number];
+  }, prop);
+}
+
+/** The first non-transparent background behind an element, walking up its ancestors. */
+export async function bgOf(page: Page, selector: string): Promise<[number, number, number]> {
+  return page.$eval(selector, (start) => {
+    const c = document.createElement('canvas'); c.width = c.height = 1;
+    const ctx = c.getContext('2d', { colorSpace: 'srgb' })!;
+    let el: Element | null = start as Element;
+    while (el) {
+      ctx.clearRect(0, 0, 1, 1);
+      ctx.fillStyle = getComputedStyle(el).backgroundColor; ctx.fillRect(0, 0, 1, 1);
+      const d = ctx.getImageData(0, 0, 1, 1).data;
+      if (d[3] > 0) return [d[0], d[1], d[2]] as [number, number, number];
+      el = el.parentElement;
+    }
+    return [255, 255, 255] as [number, number, number];
+  });
+}

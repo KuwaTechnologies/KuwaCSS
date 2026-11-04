@@ -24,7 +24,7 @@
 :where(h6) { font-size: var(--text-s); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
 
 /* Inline text */
-:where(a) { color: var(--primary); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+:where(a) { color: var(--link); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
 :where(a:hover) { text-decoration-thickness: 2px; }
 :where(strong, b) { font-weight: 600; }
 :where(small) { font-size: var(--text-s); }

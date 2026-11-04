@@ -4,10 +4,10 @@
   :root {
     color-scheme: light dark;
     --primary: oklch(55% .2 262);
-    --success: oklch(62% .17 150);
+    --success: oklch(52% .17 150);
     --warning: oklch(78% .16 80);
     --danger: oklch(58% .21 25);
-    --info: oklch(62% .14 230);
+    --info: oklch(52% .14 230);
     --text: light-dark(oklch(20% .01 260), oklch(93% .01 260));
     --muted: light-dark(oklch(48% .02 260), oklch(70% .02 260));
     --border: light-dark(oklch(88% .01 260), oklch(32% .01 260));
@@ -42,7 +42,8 @@
     --shadow-m: 0 2px 8px #0000001a;
     --shadow-l: 0 8px 24px #00000024;
     --shadow-xl: 0 20px 48px #0003;
-    --ring: var(--primary);
+    --link: light-dark(var(--primary), color-mix(in oklch, var(--primary) 60%, white));
+    --ring: var(--link);
     --on-primary: white;
     --on-success: white;
     --on-warning: oklch(22% .03 80);
@@ -53,11 +54,11 @@
     --warning-soft: color-mix(in oklch, var(--warning) 18%, var(--bg-surface));
     --danger-soft: color-mix(in oklch, var(--danger) 14%, var(--bg-surface));
     --info-soft: color-mix(in oklch, var(--info) 14%, var(--bg-surface));
-    --primary-text: color-mix(in oklch, var(--primary) 72%, var(--text));
-    --success-text: color-mix(in oklch, var(--success) 60%, var(--text));
-    --warning-text: color-mix(in oklch, var(--warning) 40%, var(--text));
-    --danger-text: color-mix(in oklch, var(--danger) 72%, var(--text));
-    --info-text: color-mix(in oklch, var(--info) 64%, var(--text));
+    --primary-text: light-dark(color-mix(in oklch, var(--primary) 85%, black), color-mix(in oklch, var(--primary) 60%, white));
+    --success-text: light-dark(color-mix(in oklch, var(--success) 80%, black), color-mix(in oklch, var(--success) 60%, white));
+    --warning-text: light-dark(color-mix(in oklch, var(--warning) 45%, black), color-mix(in oklch, var(--warning) 80%, white));
+    --danger-text: light-dark(color-mix(in oklch, var(--danger) 80%, black), color-mix(in oklch, var(--danger) 60%, white));
+    --info-text: light-dark(color-mix(in oklch, var(--info) 85%, black), color-mix(in oklch, var(--info) 60%, white));
     --primary-hover: color-mix(in oklch, var(--primary) 88%, black);
     --success-hover: color-mix(in oklch, var(--success) 88%, black);
     --warning-hover: color-mix(in oklch, var(--warning) 88%, black);
@@ -217,7 +218,7 @@
   }
 
   :where(a) {
-    color: var(--primary);
+    color: var(--link);
     text-underline-offset: .15em;
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -699,7 +700,218 @@
   }
 }
 
-@layer kuwa.components;
+@layer kuwa.components {
+  :where(button, .button).primary {
+    background: var(--primary);
+    color: var(--on-primary);
+    border-color: #0000;
+  }
+
+  :where(button, .button).primary:hover {
+    background: var(--primary-hover);
+  }
+
+  :where(button, .button).danger {
+    background: var(--danger);
+    color: var(--on-danger);
+    border-color: #0000;
+  }
+
+  :where(button, .button).danger:hover {
+    background: var(--danger-hover);
+  }
+
+  :where(button, .button).ghost {
+    color: var(--link);
+    background: none;
+    border-color: #0000;
+  }
+
+  :where(button, .button).ghost:hover {
+    background: var(--primary-soft);
+  }
+
+  :where(button, .button).small {
+    min-block-size: 2rem;
+    font-size: var(--text-s);
+    padding: .25rem .75rem;
+  }
+
+  :where(button, .button).large {
+    min-block-size: 3rem;
+    font-size: var(--text-l);
+    padding: .75rem 1.5rem;
+  }
+
+  .card {
+    background: var(--bg-surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 1.5);
+    padding: var(--space-l);
+  }
+
+  .card > :first-child {
+    margin-block-start: 0;
+  }
+
+  .card > :last-child {
+    margin-block-end: 0;
+  }
+
+  .badge {
+    font-size: var(--text-xs);
+    white-space: nowrap;
+    background: var(--bg-subtle);
+    color: var(--text);
+    border-radius: 9999px;
+    align-items: center;
+    gap: .3em;
+    padding: .15em .6em;
+    font-weight: 600;
+    line-height: 1.4;
+    display: inline-flex;
+  }
+
+  .badge.primary {
+    background: var(--primary-soft);
+    color: var(--primary-text);
+  }
+
+  .badge.success {
+    background: var(--success-soft);
+    color: var(--success-text);
+  }
+
+  .badge.warning {
+    background: var(--warning-soft);
+    color: var(--warning-text);
+  }
+
+  .badge.danger {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+  }
+
+  .badge.info {
+    background: var(--info-soft);
+    color: var(--info-text);
+  }
+
+  .alert {
+    padding: var(--space-m);
+    border-radius: var(--radius);
+    border-inline-start: 4px solid var(--border);
+    background: var(--bg-subtle);
+    color: var(--text);
+  }
+
+  .alert > :last-child {
+    margin-block-end: 0;
+  }
+
+  .alert.primary {
+    background: var(--primary-soft);
+    color: var(--primary-text);
+    border-color: var(--primary);
+  }
+
+  .alert.success {
+    background: var(--success-soft);
+    color: var(--success-text);
+    border-color: var(--success);
+  }
+
+  .alert.warning {
+    background: var(--warning-soft);
+    color: var(--warning-text);
+    border-color: var(--warning);
+  }
+
+  .alert.danger {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+    border-color: var(--danger);
+  }
+
+  .alert.info {
+    background: var(--info-soft);
+    color: var(--info-text);
+    border-color: var(--info);
+  }
+
+  .prose {
+    max-inline-size: var(--measure);
+  }
+
+  .prose > :first-child {
+    margin-block-start: 0;
+  }
+
+  .prose :where(h2) {
+    margin-block-start: var(--space-xl);
+  }
+
+  .prose :where(h3, h4) {
+    margin-block-start: var(--space-l);
+  }
+
+  .prose :where(p, li) {
+    text-wrap: pretty;
+  }
+
+  .prose :where(ul, ol) {
+    padding-inline-start: 1.5em;
+  }
+
+  .prose :where(img, video) {
+    border-radius: var(--radius);
+  }
+
+  .switch {
+    appearance: none;
+    background: var(--border);
+    cursor: pointer;
+    vertical-align: middle;
+    block-size: 1.5em;
+    inline-size: 2.75em;
+    transition: background-color var(--transition);
+    border: 0;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+  }
+
+  .switch:before {
+    content: "";
+    block-size: 1.2em;
+    inline-size: 1.2em;
+    box-shadow: var(--shadow-s);
+    transition: translate var(--transition);
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    inset-block-start: .15em;
+    inset-inline-start: .15em;
+  }
+
+  .switch:checked {
+    background: var(--primary);
+  }
+
+  .switch:checked:before {
+    translate: 1.25em;
+  }
+
+  .icon {
+    fill: currentColor;
+    vertical-align: -.125em;
+    block-size: 1em;
+    inline-size: 1em;
+    display: inline-block;
+  }
+}
 
 @layer kuwa.utilities {
   .grow {
