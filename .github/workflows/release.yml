@@ -23,10 +23,14 @@ jobs:
       - run: npm run build
       - run: git diff --exit-code -- dist
       - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - name: Shipped examples validate clean
+        run: node cli/index.js check examples cookbook
       - name: Tag matches package.json version
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
       - name: Use an npm that supports trusted publishing
-        run: npm install -g npm@latest && npm --version
+        run: npm install -g npm@11 && npm --version
       - name: Publish with a token (used when the NPM_TOKEN secret is set, e.g. for the very first release)
         if: env.NPM_TOKEN != ''
         run: |

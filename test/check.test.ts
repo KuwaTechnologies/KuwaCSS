@@ -71,10 +71,11 @@ test('clean.html exits 0 and reports zero findings', async () => {
   assert.match(r.out, /0 findings/);
 });
 
-test('empty and binary files exit 0 without crashing', async () => {
+test('empty and binary files exit 0 without crashing, and a skipped binary is reported on stderr', async () => {
   const r = await run([FX + 'empty.txt', FX + 'binary.bin']);
   assert.equal(r.code, 0);
-  assert.equal(r.err, '');
+  assert.match(r.err, /binary\.bin: skipped \(not UTF-8 text\)/);
+  assert.ok(!r.err.includes('empty.txt'), 'an empty file is valid text and is not reported');
 });
 
 test('bad.html exits 1 and --json lists kinds', async () => {
@@ -152,4 +153,50 @@ test('a symlink cycle inside a scanned directory does not crash the scan', async
   const r = await run([dir]);
   assert.notEqual(r.code, 2, r.err);
   assert.match(r.out, /0 findings in 1 file/);
+});
+
+test('--fix preserves a UTF-8 byte-order mark', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'kuwa-bom-'));
+  const file = join(dir, 'bom.html');
+  writeFileSync(file, '\uFEFF<div class="p-4">x</div>\n');
+  await run(['--fix', file]);
+  const bytes = readFileSync(file);
+  assert.deepEqual([...bytes.subarray(0, 3)], [0xef, 0xbb, 0xbf]);
+  assert.ok(bytes.toString('utf8').includes('class="padding-m"'));
+});
+
+test('--fix never rewrites inside code samples: pre, code, script, style, and Markdown fences or backticks', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'kuwa-code-'));
+  const html = join(dir, 'docs.html');
+  writeFileSync(html, '<p class="p-4">live</p>\n<pre><code>&lt;div class="p-4"&gt;</code></pre>\n<code>class="w-full"</code>\n<script>const t = \'class="p-4"\';</script>\n');
+  const r1 = await run(['--fix', html]);
+  const outHtml = readFileSync(html, 'utf8');
+  assert.ok(outHtml.startsWith('<p class="padding-m">live</p>'), outHtml);
+  assert.ok(outHtml.includes('<pre><code>&lt;div class="p-4"&gt;</code></pre>'), outHtml);
+  assert.ok(outHtml.includes('<code>class="w-full"</code>'), outHtml);
+  assert.ok(outHtml.includes('<script>const t = \'class="p-4"\';</script>'), outHtml);
+  assert.match(r1.out, /fixed 1\b/);
+  const md = join(dir, 'README.md');
+  writeFileSync(md, 'Use `class="p-4"` like this:\n\n```html\n<div class="p-4"></div>\n```\n\n<div class="p-4">prose html</div>\n');
+  await run(['--fix', md]);
+  const outMd = readFileSync(md, 'utf8');
+  assert.ok(outMd.includes('Use `class="p-4"` like this'), outMd);
+  assert.ok(outMd.includes('```html\n<div class="p-4"></div>\n```'), outMd);
+  assert.ok(outMd.includes('<div class="padding-m">prose html</div>'), outMd);
+});
+
+test('code samples are still checked, only not rewritten', () => {
+  const f = findings('<pre><code>&lt;div class="p-4"&gt;</code></pre>');
+  assert.equal(f[0]?.kind, 'foreign');
+});
+
+test('extractor line numbers are exact and large files stay fast', () => {
+  const src = '<div class="row">\n\n<p class="bold">\n\n<span class="badge">';
+  assert.deepEqual(extractClasses(src).map((c) => [c.cls, c.line]), [['row', 1], ['bold', 3], ['badge', 5]]);
+  const big = Array.from({ length: 50000 }, (_, i) => `<div class="stack gap-s" data-i="${i}">`).join('\n');
+  const t0 = performance.now();
+  const n = extractClasses(big).length;
+  const ms = performance.now() - t0;
+  assert.equal(n, 100000);
+  assert.ok(ms < 5000, `extractClasses took ${ms.toFixed(0)} ms on 50k attributes`);
 });

@@ -45,10 +45,14 @@ test('minified stylesheet is 10 KB gzipped or smaller', () => {
   assert.ok(size <= 10240, `gzipped size ${size} bytes`);
 });
 
+/** True when `.name` appears as a whole class selector, not as a prefix of a longer one. */
+const hasSelector = (name: string) => new RegExp(`\\.${escapeSelector(name).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`).test(css);
+
 test('every utility and primitive class exists as a selector, including responsive forms', () => {
   const generated = vocab.classes.filter((c: any) => c.kind === 'utility' || c.kind === 'primitive').map((c: any) => c.name);
   for (const p of Object.keys(vocab.prefixes)) for (const r of vocab.responsive) generated.push(`${p}:${r}`);
-  for (const name of generated) assert.ok(css.includes(`.${escapeSelector(name)}`), `selector missing for ${name}`);
+  for (const name of generated) assert.ok(hasSelector(name), `selector missing for ${name}`);
+  assert.ok(!hasSelector('padding-nope'), 'the boundary check must reject names that only prefix-match');
 });
 
 test('no class selector outside the vocabulary', () => {
@@ -69,7 +73,7 @@ test('no !important except inside prefers-reduced-motion', () => {
 
 test('every component and modifier class exists as a selector', () => {
   const names = vocab.classes.filter((c: any) => c.kind === 'component' || c.kind === 'modifier').map((c: any) => c.name);
-  for (const name of names) assert.ok(css.includes(`.${name}`), `selector missing for ${name}`);
+  for (const name of names) assert.ok(hasSelector(name), `selector missing for ${name}`);
 });
 
 test('dist is committed up to date (no drift)', () => {

@@ -7,11 +7,12 @@ export const CLASS_ATTR = /(?<![:\w.-])(?:class|className)\s*=\s*(?:"([^"]*)"|'(
 
 export function extractClasses(source) {
   const out = [];
-  let element = 0;
+  let element = 0, line = 1, cursor = 0;
   for (const m of source.matchAll(CLASS_ATTR)) {
     const raw = m[1] ?? m[2] ?? m[3] ?? m[4] ?? m[5] ?? '';
     const value = m[5] !== undefined ? raw.replace(/\$\{[^}]*\}/g, ' ') : raw;
-    const line = source.slice(0, m.index).split('\n').length;
+    for (let i = cursor; i < m.index; i++) if (source.charCodeAt(i) === 10) line++;
+    cursor = m.index;
     const open = source.lastIndexOf('<', m.index);
     const tag = open >= 0 ? (/^<([A-Za-z][\w.:-]*)/.exec(source.slice(open, m.index))?.[1] ?? '').toLowerCase() : '';
     const seen = new Set();

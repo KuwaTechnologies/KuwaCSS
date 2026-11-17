@@ -37,7 +37,7 @@ margin-top-{size}  margin-top-auto  margin-bottom-{size}  margin-bottom-auto  ma
 margin-left-auto  margin-right-{size}  margin-right-auto  margin
 gap-{size}  gap-x-{size}  gap-y-{size}  gap
 
-## Text (text-* is size only, never colour)
+## Text (text-* is size only, never colour; text-left/text-right follow writing direction)
 text-xs  text-s  text-m  text-l  text-xl  text-2xl  text-3xl  text-4xl  text-left  text-center
 text-right  font-sans  font-serif  font-mono  light  regular  medium  semibold  bold  italic
 uppercase  lowercase  capitalize  underline  strike  tabular  truncate  lines-2  lines-3  balance

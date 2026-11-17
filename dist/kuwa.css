@@ -707,7 +707,7 @@
     border-color: #0000;
   }
 
-  :where(button, .button).primary:hover {
+  :where(button, .button).primary:not(:disabled, [aria-disabled="true"]):hover {
     background: var(--primary-hover);
   }
 
@@ -717,7 +717,7 @@
     border-color: #0000;
   }
 
-  :where(button, .button).danger:hover {
+  :where(button, .button).danger:not(:disabled, [aria-disabled="true"]):hover {
     background: var(--danger-hover);
   }
 
@@ -727,7 +727,7 @@
     border-color: #0000;
   }
 
-  :where(button, .button).ghost:hover {
+  :where(button, .button).ghost:not(:disabled, [aria-disabled="true"]):hover {
     background: var(--primary-soft);
   }
 

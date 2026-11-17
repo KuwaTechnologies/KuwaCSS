@@ -19,7 +19,7 @@ Alignment: {{alignment}}
 ## Spacing (sizes: 0 xs s m l xl 2xl 3xl; left/right follow writing direction)
 {{spacing}}
 
-## Text (text-* is size only, never colour)
+## Text (text-* is size only, never colour; text-left/text-right follow writing direction)
 {{typography}}
 
 ## Colour (roles: primary success warning danger info; bg-{role} also sets a readable text colour; -soft is a light tint)

@@ -7,7 +7,8 @@ const HELP = `kuwacss — the KuwaCSS command line
       Validate class names. Lenient by default: flags foreign spellings (p-4),
       near-misses (text-md), bad prefixes (m:padding-l) and stray modifiers.
       --strict  also flag every class not in the vocabulary
-      --fix     rewrite unambiguous foreign spellings in place
+      --fix     rewrite unambiguous foreign spellings in place (never inside pre, code,
+                script or style, nor inside Markdown fences and backticks)
       --json    machine-readable output        --stdin  read markup from stdin
 
   kuwacss init [--agents] [--claude] [--link <file.html>] [--force]

@@ -54,7 +54,6 @@ export function primitivesCss(list: Entry[]): string {
 
 export function vocabJson(list: Entry[], version: string): object {
   return {
-    $schema: 'https://kuwacss.dev/vocab.schema.json',
     version,
     scales: { space: [...SPACE], text: [...TEXT] },
     prefixes: { ...PREFIXES },

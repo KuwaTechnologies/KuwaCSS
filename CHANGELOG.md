@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- `kuwacss check --fix` preserves a UTF-8 byte-order mark and never rewrites inside `pre`, `code`, `script` or `style`, nor inside Markdown fences and backticks; code samples are still checked.
+- `kuwacss check` reports files it skips as not UTF-8 on stderr and counts only checked files in the summary.
+- Disabled `primary`, `danger` and `ghost` buttons no longer change colour on hover.
+- `vocab.json` no longer carries a `$schema` URL that does not resolve.
+- Extractor line numbering is linear; 50,000 class attributes are processed in well under a second.
+- Tests run one file at a time so the dist build cannot race files that read it; completeness tests match whole selectors.
+- Docs: the README names the reduced-motion exception to "no `!important`"; `llms.txt` notes that `text-left` and `text-right` follow writing direction.
+- Workflows: CI is read-only and also runs on tags; the release job pins npm 11 and runs the browser suite and the example check before publishing.
+
 ## 0.1.0
 
 First public release.

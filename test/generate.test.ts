@@ -53,6 +53,7 @@ test('primitivesCss emits grid in the layout layer', () => {
 test('vocabJson shape', () => {
   const v = vocabJson(list, '0.1.0') as any;
   assert.equal(v.version, '0.1.0');
+  assert.ok(!('$schema' in v), 'vocab.json must not point at a schema URL that does not exist');
   assert.equal(v.prefixes.m, '48rem');
   assert.equal(v.classes.find((c: any) => c.name === 'row').responsive, true);
   assert.equal(v.classes.find((c: any) => c.name === 'padding-l').responsive, false);

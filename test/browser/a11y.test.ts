@@ -39,3 +39,13 @@ test('buttons meet target size: 40px, or 24px for .small (WCAG 2.5.8)', async ()
     .filter((b) => b.h > 0 && b.h < (b.small ? 24 : 40)));
   assert.deepEqual(short, []);
 });
+
+test('a disabled primary button keeps its background on hover; an enabled one changes', async () => {
+  const page = await open({ file: 'kitchen-sink.html' });
+  const before = await computed(page, '#btn-primary-disabled', 'background-color');
+  await page.hover('#btn-primary-disabled', { force: true });
+  assert.equal(await computed(page, '#btn-primary-disabled', 'background-color'), before);
+  const enabledBefore = await computed(page, '#btn-primary', 'background-color');
+  await page.hover('#btn-primary');
+  assert.notEqual(await computed(page, '#btn-primary', 'background-color'), enabledBefore);
+});

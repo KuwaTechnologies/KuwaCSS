@@ -57,7 +57,7 @@ import 'kuwacss/min';    // dist/kuwa.min.css
 | **Say what you mean** | `padding-l`, not `p-6`. `color-danger`, not `text-red-600`. `text-*` is always size, never colour. |
 | **No holes in the grammar** | If `padding-m` exists, every side and every size exists. A test proves it on every build. |
 | **Layout is named, not assembled** | `sidebar`, not `flex flex-wrap gap-4 [&>*:first-child]:basis-64`. Primitives adapt to space, so most pages need no breakpoints. |
-| **The cascade you can trust** | Everything lives in `@layer kuwa.*`. Any unlayered rule you write wins, whatever its specificity. No `!important`. |
+| **The cascade you can trust** | Everything lives in `@layer kuwa.*`. Any unlayered rule you write wins, whatever its specificity. No `!important`, except the single reduced-motion rule. |
 | **Verifiable by machines** | `npx kuwacss check` flags invented classes with a suggestion, and exits non-zero for CI and agent loops. |
 
 ## The vocabulary

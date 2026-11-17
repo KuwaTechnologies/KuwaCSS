@@ -26,6 +26,10 @@ test('llms.txt lists the responsive whitelist and the forbidden spellings', () =
   assert.ok(llms.includes('p-4'));
 });
 
+test('llms.txt says text-left and text-right follow writing direction', () => {
+  assert.match(llms, /text-left.*text-right.*writing direction|writing direction.*text-left/);
+});
+
 test('llms-full.txt starts with llms.txt and appends the cookbook', () => {
   assert.ok(full.startsWith(llms));
   for (const name of ['landing.html', 'dashboard.html', 'settings-form.html', 'pricing.html']) assert.ok(full.includes(`## Pattern: ${name}`), `missing pattern ${name}`);

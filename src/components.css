@@ -2,11 +2,11 @@
 
 /* Button variants (a <button> or <a class="button"> already has the base look) */
 :where(button, .button).primary { background: var(--primary); color: var(--on-primary); border-color: transparent; }
-:where(button, .button).primary:hover { background: var(--primary-hover); }
+:where(button, .button).primary:not(:disabled, [aria-disabled="true"]):hover { background: var(--primary-hover); }
 :where(button, .button).danger { background: var(--danger); color: var(--on-danger); border-color: transparent; }
-:where(button, .button).danger:hover { background: var(--danger-hover); }
+:where(button, .button).danger:not(:disabled, [aria-disabled="true"]):hover { background: var(--danger-hover); }
 :where(button, .button).ghost { background: transparent; border-color: transparent; color: var(--link); }
-:where(button, .button).ghost:hover { background: var(--primary-soft); }
+:where(button, .button).ghost:not(:disabled, [aria-disabled="true"]):hover { background: var(--primary-soft); }
 :where(button, .button).small { min-block-size: 2rem; padding: 0.25rem 0.75rem; font-size: var(--text-s); }
 :where(button, .button).large { min-block-size: 3rem; padding: 0.75rem 1.5rem; font-size: var(--text-l); }
 
