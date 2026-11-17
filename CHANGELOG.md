@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
+
+First public release.
+
+### Hardening after the independent review
 
 - `kuwacss check --fix` preserves a UTF-8 byte-order mark and never rewrites inside `pre`, `code`, `script` or `style`, nor inside Markdown fences and backticks; code samples are still checked.
 - `kuwacss check` reports files it skips as not UTF-8 on stderr and counts only checked files in the summary.
@@ -11,9 +15,7 @@
 - Docs: the README names the reduced-motion exception to "no `!important`"; `llms.txt` notes that `text-left` and `text-right` follow writing direction.
 - Workflows: CI is read-only and also runs on tags; the release job pins npm 11 and runs the browser suite and the example check before publishing.
 
-## 0.1.0
-
-First public release.
+### Contents
 
 - Classless base: semantic HTML looks finished in light and dark mode.
 - Layout primitives: `stack`, `row`, `grid`, `cols-1..4`, `container`, `center`, `sidebar`, `sidebar-right`, `cover`, `switcher`, `frame`, `reel`.

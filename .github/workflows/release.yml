@@ -29,13 +29,18 @@ jobs:
         run: node cli/index.js check examples cookbook
       - name: Tag matches package.json version
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+      - name: Skip if this version is already on npm
+        id: exists
+        run: |
+          v=$(node -p "require('./package.json').version")
+          if npm view "kuwacss@${v}" version >/dev/null 2>&1; then echo "published=true" >> "$GITHUB_OUTPUT"; echo "kuwacss@${v} is already on npm; nothing to publish"; else echo "published=false" >> "$GITHUB_OUTPUT"; fi
       - name: Use an npm that supports trusted publishing
         run: npm install -g npm@11 && npm --version
       - name: Publish with a token (used when the NPM_TOKEN secret is set, e.g. for the very first release)
-        if: env.NPM_TOKEN != ''
+        if: steps.exists.outputs.published == 'false' && env.NPM_TOKEN != ''
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
           npm publish --provenance --access public
       - name: Publish with trusted publishing (OIDC, no secret needed once configured on npmjs.com)
-        if: env.NPM_TOKEN == ''
+        if: steps.exists.outputs.published == 'false' && env.NPM_TOKEN == ''
         run: npm publish --provenance --access public
